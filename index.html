@@ -21,18 +21,23 @@
         }
 
         :root {
-            --gold: #C9A96E;
+            --gold: #C8A96E;
             --gold-light: #D4AF37;
-            --gold-dark: #A8893E;
-            --gold-gradient: linear-gradient(135deg, #C9A96E 0%, #D4AF37 50%, #C9A96E 100%);
-            --cream: #FFF8F0;
-            --cream-dark: #F5E6CC;
-            --white: #FFFFFF;
-            --text-dark: #2C2C2C;
-            --text-medium: #5A5A5A;
-            --text-light: #8A8A8A;
-            --overlay-dark: rgba(44, 44, 44, 0.85);
-            --overlay-gold: rgba(201, 169, 110, 0.15);
+            --gold-dark: #8B6914;
+            --gold-gradient: linear-gradient(135deg, #C8A96E 0%, #D4AF37 50%, #C8A96E 100%);
+            --cream: #FFF8E7;
+            --cream-dark: #F0E4C8;
+            --brown: #5C3D2E;
+            --brown-light: #8B6F5E;
+            --brown-dark: #3E2518;
+            --maroon: #8B1A1A;
+            --maroon-light: #A52A2A;
+            --white: #FFFDF5;
+            --text-dark: #3E2518;
+            --text-medium: #6B4C3B;
+            --text-light: #9E7E6D;
+            --overlay-dark: rgba(62, 37, 24, 0.85);
+            --overlay-gold: rgba(200, 169, 110, 0.15);
             --font-script: 'Crimson Text', serif;
             --font-serif: 'Crimson Text', serif;
             --font-sans: 'Quicksand', sans-serif;
@@ -103,7 +108,9 @@
             justify-content: center;
             text-align: center;
             position: relative;
-            background: linear-gradient(180deg, var(--cream) 0%, var(--cream-dark) 50%, var(--cream) 100%);
+            background: 
+                url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23C8A96E' stroke-width='0.5' opacity='0.08'%3E%3Cpath d='M40 0 L40 80 M0 40 L80 40'/%3E%3Ccircle cx='40' cy='40' r='15'/%3E%3Ccircle cx='40' cy='40' r='8'/%3E%3Cpath d='M25 25 L55 55 M55 25 L25 55'/%3E%3C/g%3E%3C/svg%3E"),
+                linear-gradient(180deg, var(--cream) 0%, var(--cream-dark) 50%, var(--cream) 100%);
             padding: 2rem 1rem;
         }
 
@@ -290,9 +297,18 @@
 
         .section-divider {
             width: 80px;
-            height: 1px;
-            background: var(--gold-gradient);
+            height: 20px;
             margin: 1rem auto 0;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 20'%3E%3Cpath d='M0 10 Q15 0 30 10 Q45 20 60 10 Q75 0 90 10 Q105 20 120 10' stroke='%23C8A96E' stroke-width='1.5' fill='none'/%3E%3Ccircle cx='30' cy='10' r='2' fill='%23C8A96E'/%3E%3Ccircle cx='60' cy='10' r='2' fill='%23C8A96E'/%3E%3Ccircle cx='90' cy='10' r='2' fill='%23C8A96E'/%3E%3C/svg%3E") no-repeat center;
+            background-size: contain;
+        }
+
+        .cover-divider {
+            width: 150px;
+            height: 24px;
+            margin: 1.5rem auto;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 24'%3E%3Cpath d='M0 12 Q25 0 50 12 Q75 24 100 12 Q125 0 150 12 Q175 24 200 12' stroke='%23C8A96E' stroke-width='1.5' fill='none'/%3E%3Ccircle cx='50' cy='12' r='2.5' fill='%23C8A96E'/%3E%3Ccircle cx='100' cy='12' r='3' fill='%23C8A96E'/%3E%3Ccircle cx='150' cy='12' r='2.5' fill='%23C8A96E'/%3E%3C/svg%3E") no-repeat center;
+            background-size: contain;
         }
 
         /* Reveal animation */
@@ -484,10 +500,11 @@
             background: var(--white);
             border-radius: 20px;
             padding: 2.5rem 2rem;
-            box-shadow: 0 4px 30px rgba(201, 169, 110, 0.1);
-            border: 1px solid rgba(201, 169, 110, 0.15);
+            box-shadow: 0 4px 30px rgba(200, 169, 110, 0.1);
+            border: 1px solid rgba(200, 169, 110, 0.15);
             position: relative;
             overflow: hidden;
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23C8A96E' stroke-width='0.3' opacity='0.06'%3E%3Ccircle cx='30' cy='30' r='15'/%3E%3Ccircle cx='30' cy='30' r='8'/%3E%3Cpath d='M15 15 L45 45 M45 15 L15 45'/%3E%3C/g%3E%3C/svg%3E");
         }
 
         .event-card::before {
@@ -936,7 +953,7 @@
 
         /* ============ FOOTER ============ */
         .footer {
-            background: var(--gold-dark);
+            background: var(--brown-dark);
             text-align: center;
             padding: 3rem 1.5rem;
         }
@@ -1104,13 +1121,20 @@
 
     <!-- ===== COVER ===== -->
     <section class="cover" id="cover">
-        <svg class="cover-ornament-top" viewBox="0 0 200 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M100 35 Q80 10 60 20 Q40 30 20 15 Q0 0 0 0" stroke="#C9A96E" stroke-width="1" fill="none" opacity="0.5"/>
-            <path d="M100 35 Q120 10 140 20 Q160 30 180 15 Q200 0 200 0" stroke="#C9A96E" stroke-width="1" fill="none" opacity="0.5"/>
-            <circle cx="100" cy="5" r="3" fill="#C9A96E" opacity="0.5"/>
+        <svg class="cover-ornament-top" viewBox="0 0 200 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Javanese kawung-inspired ornament -->
+            <circle cx="100" cy="25" r="12" stroke="#C8A96E" stroke-width="1" fill="none" opacity="0.4"/>
+            <circle cx="100" cy="25" r="6" stroke="#C8A96E" stroke-width="0.8" fill="none" opacity="0.3"/>
+            <circle cx="80" cy="25" r="8" stroke="#C8A96E" stroke-width="0.8" fill="none" opacity="0.3"/>
+            <circle cx="120" cy="25" r="8" stroke="#C8A96E" stroke-width="0.8" fill="none" opacity="0.3"/>
+            <path d="M60 25 Q70 15 80 25 Q90 35 100 25 Q110 15 120 25 Q130 35 140 25" stroke="#C8A96E" stroke-width="1" fill="none" opacity="0.3"/>
+            <line x1="30" y1="25" x2="55" y2="25" stroke="#C8A96E" stroke-width="0.5" opacity="0.3"/>
+            <line x1="145" y1="25" x2="170" y2="25" stroke="#C8A96E" stroke-width="0.5" opacity="0.3"/>
+            <circle cx="100" cy="25" r="3" fill="#C8A96E" opacity="0.3"/>
         </svg>
 
-        <div class="cover-subtitle">The Wedding of</div>
+        <div class="cover-subtitle">꧋ꦱꦸꦩ꧀ꦱꦶꦩꦤ꧀ꦱꦸꦏꦸꦂꦤꦮꦸꦱꦤꦤ꧀ꦠ꧀ꦢꦶꦩꦺꦴꦔꦶꦂꦠꦶꦏꦺ꧋</div>
+        <div class="cover-subtitle" style="font-family: var(--font-sans); font-size: 0.7rem; margin-top: 0.5rem; letter-spacing: 4px;">THE WEDDING OF</div>
         <h1 class="cover-names">
             Adriani Oktaviani
             <span class="cover-ampersand">&</span>
@@ -1123,9 +1147,16 @@
             Buka Undangan
         </a>
 
-        <svg class="cover-ornament-bottom" viewBox="0 0 200 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M100 35 Q80 10 60 20 Q40 30 20 15 Q0 0 0 0" stroke="#C9A96E" stroke-width="1" fill="none" opacity="0.5"/>
-            <path d="M100 35 Q120 10 140 20 Q160 30 180 15 Q200 0 200 0" stroke="#C9A96E" stroke-width="1" fill="none" opacity="0.5"/>
+        <svg class="cover-ornament-bottom" viewBox="0 0 200 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Javanese kawung-inspired ornament -->
+            <circle cx="100" cy="25" r="12" stroke="#C8A96E" stroke-width="1" fill="none" opacity="0.4"/>
+            <circle cx="100" cy="25" r="6" stroke="#C8A96E" stroke-width="0.8" fill="none" opacity="0.3"/>
+            <circle cx="80" cy="25" r="8" stroke="#C8A96E" stroke-width="0.8" fill="none" opacity="0.3"/>
+            <circle cx="120" cy="25" r="8" stroke="#C8A96E" stroke-width="0.8" fill="none" opacity="0.3"/>
+            <path d="M60 25 Q70 15 80 25 Q90 35 100 25 Q110 15 120 25 Q130 35 140 25" stroke="#C8A96E" stroke-width="1" fill="none" opacity="0.3"/>
+            <line x1="30" y1="25" x2="55" y2="25" stroke="#C8A96E" stroke-width="0.5" opacity="0.3"/>
+            <line x1="145" y1="25" x2="170" y2="25" stroke="#C8A96E" stroke-width="0.5" opacity="0.3"/>
+            <circle cx="100" cy="25" r="3" fill="#C8A96E" opacity="0.3"/>
         </svg>
     </section>
 
@@ -1219,7 +1250,7 @@
                     <i>📅</i> Sabtu, 5 September 2026
                 </div>
                 <div class="event-detail">
-                    <i>🕐</i> 08:00 WIB - Selesai
+                    <i>🕐</i> 08:00 - 10:00 WIB
                 </div>
                 <div class="event-detail">
                     <i>📍</i> Perumahan Taman Jatisari Permai
@@ -1242,7 +1273,7 @@
                     <i>📅</i> Sabtu, 5 September 2026
                 </div>
                 <div class="event-detail">
-                    <i>🕐</i> 11:00 - 17:00 WIB
+                    <i>🕐</i> 10:00 - 16:00 WIB
                 </div>
                 <div class="event-detail">
                     <i>📍</i> Perumahan Taman Jatisari Permai
