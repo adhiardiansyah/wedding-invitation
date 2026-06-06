@@ -1465,32 +1465,47 @@
             e.preventDefault();
             isOpened = true;
             document.getElementById('navDots').classList.add('visible');
-            document.getElementById('musicToggle').classList.add('visible');
-            // Play music on user interaction (browser policy requires user gesture)
-            const music = document.getElementById('bgMusic');
-            music.play().then(() => {
-                musicPlaying = true;
-                document.getElementById('musicToggle').classList.add('playing');
-                document.getElementById('musicIcon').textContent = '❚❚';
-            }).catch(() => {});
             document.getElementById('bismillah').scrollIntoView({ behavior: 'smooth' });
         }
 
-        // ============ MUSIC TOGGLE ============
+        // ============ AUTO-PLAY MUSIC ============
         let musicPlaying = false;
+        const music = document.getElementById('bgMusic');
+        const musicToggle = document.getElementById('musicToggle');
+
+        function startMusic() {
+            if (musicPlaying) return;
+            music.play().then(() => {
+                musicPlaying = true;
+                musicToggle.classList.add('playing');
+                document.getElementById('musicIcon').textContent = '❚❚';
+            }).catch(() => {});
+        }
+
+        // Try auto-play immediately
+        musicToggle.classList.add('visible');
+        startMusic();
+
+        // If auto-play blocked, start on first user interaction
+        ['click', 'touchstart', 'scroll', 'keydown'].forEach(evt => {
+            document.addEventListener(evt, function onFirst() {
+                startMusic();
+            }, { once: false, passive: true });
+        });
+
+        // ============ MUSIC TOGGLE ============
         function toggleMusic() {
-            const music = document.getElementById('bgMusic');
-            const toggle = document.getElementById('musicToggle');
             if (musicPlaying) {
                 music.pause();
-                toggle.classList.remove('playing');
+                musicToggle.classList.remove('playing');
                 document.getElementById('musicIcon').textContent = '♪';
+                musicPlaying = false;
             } else {
                 music.play().catch(() => {});
-                toggle.classList.add('playing');
+                musicToggle.classList.add('playing');
                 document.getElementById('musicIcon').textContent = '❚❚';
+                musicPlaying = true;
             }
-            musicPlaying = !musicPlaying;
         }
 
         // ============ COUNTDOWN ============
