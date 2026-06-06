@@ -396,6 +396,26 @@
             animation: fadeInUp 1s ease 0.7s both;
         }
 
+        .cover-guest {
+            font-family: var(--font-sans);
+            font-size: 0.75rem;
+            font-weight: 400;
+            letter-spacing: 2px;
+            color: var(--text-light);
+            margin-top: 0.8rem;
+            padding: 0.5rem 1.5rem;
+            border: 1px solid rgba(200, 169, 110, 0.3);
+            border-radius: 20px;
+            display: inline-block;
+            background: rgba(200, 169, 110, 0.05);
+            animation: fadeInUp 1s ease 0.8s both;
+        }
+
+        .cover-guest strong {
+            color: var(--gold-dark);
+            font-weight: 600;
+        }
+
         .cover-divider {
             width: 120px;
             height: 1px;
@@ -1613,6 +1633,7 @@
         </h1>
         <div class="cover-divider"></div>
         <p class="cover-date">Sabtu, 5 September 2026</p>
+        <p class="cover-guest" id="guestName" style="display:none;">Kepada Yth. <strong id="guestNameText"></strong></p>
 
         <a href="#bismillah" class="open-invitation-btn" id="openBtn" onclick="openInvitation(event)">
             Buka Undangan
@@ -1944,6 +1965,19 @@
             setTimeout(() => {
                 document.getElementById('loading').classList.add('hidden');
             }, 1500);
+
+            // ============ GUEST NAME FROM URL PARAMETER ============
+            const urlParams = new URLSearchParams(window.location.search);
+            const guestName = urlParams.get('to') || urlParams.get('nama') || urlParams.get('untuk');
+            
+            if (guestName) {
+                const decodedName = decodeURIComponent(guestName).replace(/\+/g, ' ');
+                document.getElementById('guestNameText').textContent = decodedName;
+                document.getElementById('guestName').style.display = 'inline-block';
+                
+                // Also update page title
+                document.title = `Undangan untuk ${decodedName} | Ayu & Adhi Wedding`;
+            }
         });
 
         // ============ OPEN INVITATION ============
