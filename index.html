@@ -780,6 +780,92 @@
             color: var(--gold-dark);
         }
 
+        /* ============ GIFT / AMPLOP DIGITAL ============ */
+        .gift {
+            background: var(--white);
+            text-align: center;
+        }
+
+        .gift-card {
+            max-width: 420px;
+            margin: 0 auto;
+            background: var(--cream);
+            border-radius: 20px;
+            padding: 2.5rem 2rem;
+            border: 1px solid rgba(201, 169, 110, 0.15);
+            box-shadow: 0 4px 30px rgba(201, 169, 110, 0.1);
+        }
+
+        .gift-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .gift-bank {
+            font-family: var(--font-sans);
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 0.8rem;
+        }
+
+        .gift-account {
+            font-family: var(--font-serif);
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            letter-spacing: 2px;
+            margin-bottom: 0.5rem;
+            user-select: all;
+        }
+
+        .gift-name {
+            font-family: var(--font-serif);
+            font-size: 1rem;
+            color: var(--text-medium);
+            margin-bottom: 1.2rem;
+        }
+
+        .gift-copy-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.6rem 1.5rem;
+            font-family: var(--font-sans);
+            font-size: 0.7rem;
+            font-weight: 500;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--gold);
+            background: transparent;
+            border: 1px solid var(--gold);
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .gift-copy-btn:hover {
+            background: var(--gold);
+            color: var(--white);
+        }
+
+        .gift-copy-btn.copied {
+            background: var(--gold);
+            color: var(--white);
+        }
+
+        .gift-note {
+            font-family: var(--font-serif);
+            font-size: 0.85rem;
+            font-style: italic;
+            color: var(--text-light);
+            max-width: 400px;
+            margin: 1.5rem auto 0;
+            line-height: 1.6;
+        }
+
         /* ============ WISHES WALL ============ */
         .wishes-wall {
             max-width: 500px;
@@ -1012,6 +1098,7 @@
         <div class="nav-dot" data-section="story"><span class="tooltip">Cerita</span></div>
         <div class="nav-dot" data-section="gallery"><span class="tooltip">Galeri</span></div>
         <div class="nav-dot" data-section="rsvp"><span class="tooltip">RSVP</span></div>
+        <div class="nav-dot" data-section="gift"><span class="tooltip">Hadiah</span></div>
     </div>
 
     <!-- ===== COVER ===== -->
@@ -1285,6 +1372,30 @@
         </div>
     </section>
 
+    <!-- ===== GIFT ===== -->
+    <section class="gift" id="gift">
+        <div class="section-header reveal">
+            <div class="section-label">Amplop Digital</div>
+            <div class="section-title">Hadiah</div>
+            <div class="section-divider"></div>
+        </div>
+
+        <div class="gift-card reveal">
+            <div class="gift-icon">🎁</div>
+            <div class="gift-bank">Bank BRI</div>
+            <div class="gift-account" id="giftAccount">670701031400534</div>
+            <div class="gift-name">a.n. Adhi Ardiansyah</div>
+            <button class="gift-copy-btn" onclick="copyAccount()">
+                📋 Salin Nomor
+            </button>
+        </div>
+
+        <p class="gift-note reveal">
+            Bagi yang ingin memberikan tanda kasih, dapat mengirimkannya melalui rekening di atas.<br>
+            Atas perhatian dan kebaikan hati Bapak/Ibu/Saudara/i, kami mengucapkan terima kasih. 🙏
+        </p>
+    </section>
+
     <!-- ===== FOOTER ===== -->
     <section class="footer">
         <div class="footer-names">Ayu & Adhi</div>
@@ -1377,7 +1488,7 @@
         setInterval(updateCountdown, 1000);
 
         // ============ NAV DOTS ============
-        const sections = ['cover', 'bismillah', 'couple', 'events', 'story', 'gallery', 'rsvp'];
+        const sections = ['cover', 'bismillah', 'couple', 'events', 'story', 'gallery', 'rsvp', 'gift'];
         const navDots = document.querySelectorAll('.nav-dot');
 
         navDots.forEach(dot => {
@@ -1493,6 +1604,35 @@
 
         // Initial render of wishes
         renderWishes();
+
+        // ============ COPY ACCOUNT NUMBER ============
+        function copyAccount() {
+            const account = document.getElementById('giftAccount').textContent;
+            const btn = document.querySelector('.gift-copy-btn');
+
+            navigator.clipboard.writeText(account).then(() => {
+                btn.classList.add('copied');
+                btn.innerHTML = '✅ Tersalin!';
+                setTimeout(() => {
+                    btn.classList.remove('copied');
+                    btn.innerHTML = '📋 Salin Nomor';
+                }, 2000);
+            }).catch(() => {
+                // Fallback for older browsers
+                const textarea = document.createElement('textarea');
+                textarea.value = account;
+                document.body.appendChild(textarea);
+                textarea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textarea);
+                btn.classList.add('copied');
+                btn.innerHTML = '✅ Tersalin!';
+                setTimeout(() => {
+                    btn.classList.remove('copied');
+                    btn.innerHTML = '📋 Salin Nomor';
+                }, 2000);
+            });
+        }
 
         // ============ PREVENT SCROLL ON LOAD ============
         document.body.style.overflow = 'hidden';
