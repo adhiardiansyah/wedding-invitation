@@ -1435,12 +1435,13 @@
             isOpened = true;
             document.getElementById('navDots').classList.add('visible');
             document.getElementById('musicToggle').classList.add('visible');
-            // Try to play music
+            // Play music on user interaction (browser policy requires user gesture)
             const music = document.getElementById('bgMusic');
-            if (music.querySelector('source').src && !music.querySelector('source').src.endsWith('music.mp3')) {
-                music.play().catch(() => {});
+            music.play().then(() => {
+                musicPlaying = true;
                 document.getElementById('musicToggle').classList.add('playing');
-            }
+                document.getElementById('musicIcon').textContent = '❚❚';
+            }).catch(() => {});
             document.getElementById('bismillah').scrollIntoView({ behavior: 'smooth' });
         }
 
