@@ -141,6 +141,8 @@
         /* ===== COVER ===== */
         .cover {
             min-height: 100vh;
+            min-height: 100dvh;
+            min-height: 100svh;
             display: flex; flex-direction: column; align-items: center; justify-content: center;
             text-align: center;
             position: relative;
@@ -292,7 +294,7 @@
         }
 
         /* ===== LOCK SCROLL (before opening) ===== */
-        body.locked { overflow: hidden; height: 100vh; }
+        body.locked { overflow: hidden; height: 100vh; height: 100dvh; height: 100svh; }
         body.locked .bottom-nav { opacity: 0; pointer-events: none; }
 
         /* ===== JAVANESE OPENING ANIMATION ===== */
@@ -1154,8 +1156,8 @@
             else { musicStarting = true; music.play().then(() => { musicPlaying = true; musicStarting = false; musicToggle.classList.add('playing'); document.getElementById('musicIcon').textContent = '❚❚'; }).catch(() => { musicStarting = false; }); }
         }
         function onGesture(e) { if (e.target.closest('.music-toggle')) return; playMusic(); }
-        music.volume = 1; playMusic();
-        ['click','touchstart','pointerdown'].forEach(e => window.addEventListener(e, onGesture, { passive: true }));
+        music.volume = 1;
+        // Music starts ONLY when clicking "Buka Undangan" (handled in openInvitation)
 
         // Countdown
         function updateCountdown() {
