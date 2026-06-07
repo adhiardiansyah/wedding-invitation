@@ -2,7 +2,7 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Ayu & Adhi | Wedding Invitation</title>
     <meta name="description" content="Undangan Pernikahan Adriani Oktaviani Ayu Wangi & Adhi Ardiansyah - 5 September 2026">
     <meta property="og:title" content="Ayu & Adhi | Wedding Invitation">
@@ -269,9 +269,11 @@
             z-index: 1000;
             background: linear-gradient(180deg, rgba(107, 74, 53, 0.95) 0%, rgba(107, 74, 53, 1) 100%);
             backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             border-top: 1px solid rgba(200, 169, 110, 0.4);
             display: flex; justify-content: space-around; align-items: center;
             padding: 0.4rem 0.2rem;
+            padding-bottom: calc(0.4rem + env(safe-area-inset-bottom, 0px));
             opacity: 1; transform: translateY(0);
         }
         .bottom-nav-item {
@@ -622,7 +624,7 @@
 
         /* ===== FOOTER ===== */
         .footer {
-            background: var(--brown-dark); text-align: center; padding: 3rem 1.5rem 5rem;
+            background: var(--brown-dark); text-align: center; padding: 3rem 1.5rem 6rem;
             position: relative; overflow: hidden;
         }
         .footer::before {
