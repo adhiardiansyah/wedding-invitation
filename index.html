@@ -270,10 +270,8 @@
             border-top: 1px solid rgba(200, 169, 110, 0.4);
             display: flex; justify-content: space-around; align-items: center;
             padding: 0.4rem 0.2rem;
-            opacity: 0; transform: translateY(100%);
-            transition: opacity 0.5s ease, transform 0.5s ease;
+            opacity: 1; transform: translateY(0);
         }
-        .bottom-nav.visible { opacity: 1; transform: translateY(0); }
         .bottom-nav-item {
             display: flex; flex-direction: column; align-items: center; gap: 0.15rem;
             cursor: pointer; padding: 0.3rem 0.5rem; border-radius: 8px;
@@ -1031,7 +1029,6 @@
         // Open invitation
         function openInvitation(e) {
             e.preventDefault();
-            document.getElementById('bottomNav').classList.add('visible');
             document.getElementById('bismillah').scrollIntoView({ behavior: 'smooth' });
         }
 
