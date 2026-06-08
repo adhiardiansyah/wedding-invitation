@@ -12,6 +12,11 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+
     <style>
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -1086,6 +1091,34 @@
 
     <script>
         const WEDDING_DATE = new Date('2026-09-05T08:00:00+07:00');
+
+        // ===== FIREBASE CONFIG =====
+        // Ganti dengan config Firebase kamu (lihat FIREBASE_SETUP.md)
+        const firebaseConfig = {
+            apiKey: "GANTI_DENGAN_API_KEY_KAMU",
+            authDomain: "GANTI_DENGAN_PROJECT_ID.firebaseapp.com",
+            databaseURL: "https://GANTI_DENGAN_PROJECT_ID-default-rtdb.firebaseio.com",
+            projectId: "GANTI_DENGAN_PROJECT_ID",
+            storageBucket: "GANTI_DENGAN_PROJECT_ID.appspot.com",
+            messagingSenderId: "GANTI_DENGAN_SENDER_ID",
+            appId: "GANTI_DENGAN_APP_ID"
+        };
+
+        // Initialize Firebase
+        let db = null;
+        let wishesRef = null;
+        let useFirebase = false;
+
+        try {
+            firebase.initializeApp(firebaseConfig);
+            db = firebase.database();
+            wishesRef = db.ref('wishes');
+            useFirebase = true;
+            console.log('✅ Firebase connected');
+        } catch (e) {
+            console.log('⚠️ Firebase not configured, using localStorage fallback');
+        }
+
         const STORAGE_KEY = 'wedding-wishes';
 
         // Loading
@@ -1191,30 +1224,70 @@
         }, { threshold: 0.1 });
         document.querySelectorAll('.reveal,.reveal-left,.reveal-right,.reveal-scale').forEach(el => revealObs.observe(el));
 
-        // RSVP
-        function getWishes() { try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || []; } catch { return []; } }
-        function saveWishes(w) { localStorage.setItem(STORAGE_KEY, JSON.stringify(w)); }
+        // ===== RSVP & WISHES =====
+        function getWishesLocal() { try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || []; } catch { return []; } }
+        function saveWishesLocal(w) { localStorage.setItem(STORAGE_KEY, JSON.stringify(w)); }
         function escapeHtml(t) { const d = document.createElement('div'); d.textContent = t; return d.innerHTML; }
-        function renderWishes() {
-            document.getElementById('wishesWall').innerHTML = getWishes().map(w =>
+
+        function renderWishes(wishes) {
+            const list = wishes || getWishesLocal();
+            document.getElementById('wishesWall').innerHTML = list.map(w =>
                 `<div class="wish-card"><div class="wish-header"><div class="wish-name">${escapeHtml(w.name)}</div><div class="wish-attendance">${escapeHtml(w.attendance)}</div></div><div class="wish-message">${escapeHtml(w.message)}</div></div>`
             ).join('');
         }
+
         function submitRSVP(e) {
             e.preventDefault();
             const name = document.getElementById('rsvpName').value.trim();
             const attendance = document.getElementById('guestAttendance').value;
             const message = document.getElementById('guestMessage').value.trim();
             if (!name || !attendance) return;
-            const wishes = getWishes();
-            wishes.unshift({ name, attendance, count: document.getElementById('guestCount').value, message: message || 'Semoga menjadi keluarga yang sakinah, mawaddah, warahmah 🤲', timestamp: Date.now() });
-            saveWishes(wishes);
+
+            const wishData = {
+                name,
+                attendance,
+                count: document.getElementById('guestCount').value,
+                message: message || 'Semoga menjadi keluarga yang sakinah, mawaddah, warahmah 🤲',
+                timestamp: Date.now()
+            };
+
+            if (useFirebase && wishesRef) {
+                // Save to Firebase
+                wishesRef.push(wishData).then(() => {
+                    console.log('✅ Wish saved to Firebase');
+                }).catch(err => {
+                    console.error('❌ Firebase error:', err);
+                    // Fallback to localStorage
+                    const wishes = getWishesLocal();
+                    wishes.unshift(wishData);
+                    saveWishesLocal(wishes);
+                });
+            } else {
+                // Fallback to localStorage
+                const wishes = getWishesLocal();
+                wishes.unshift(wishData);
+                saveWishesLocal(wishes);
+            }
+
             document.getElementById('rsvpForm').style.display = 'none';
             document.getElementById('formSuccess').classList.add('show');
-            setTimeout(renderWishes, 500);
             setTimeout(() => { document.getElementById('rsvpForm').reset(); document.getElementById('rsvpForm').style.display = 'block'; document.getElementById('formSuccess').classList.remove('show'); }, 3000);
         }
-        renderWishes();
+
+        // Listen for real-time updates from Firebase
+        if (useFirebase && wishesRef) {
+            wishesRef.orderByChild('timestamp').on('value', (snapshot) => {
+                const data = snapshot.val();
+                if (data) {
+                    const wishes = Object.values(data).sort((a, b) => b.timestamp - a.timestamp);
+                    renderWishes(wishes);
+                } else {
+                    renderWishes([]);
+                }
+            });
+        } else {
+            renderWishes();
+        }
 
         // Copy account
         function copyAccount() {
