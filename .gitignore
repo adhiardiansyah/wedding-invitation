@@ -1,0 +1,12 @@
+# Dependencies
+node_modules/
+
+# Generated files
+undangan-fisik.pdf
+
+# Editor
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db

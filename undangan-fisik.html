@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Undangan Pernikahan - Ayu & Adhi</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gold: #B8860B;
+            --gold-light: #D4AF37;
+            --gold-pale: #F5E6B8;
+            --cream: #FFFEF7;
+            --cream-warm: #FDF8ED;
+            --brown: #4A3728;
+            --brown-dark: #2C1810;
+            --brown-medium: #6B4E3D;
+            --text-dark: #1A1A1A;
+            --text-body: #333333;
+            --text-light: #666666;
+            --border-gold: #C5A55A;
+            --font-display: 'Playfair Display', serif;
+            --font-body: 'Cormorant Garamond', serif;
+            --font-sans: 'Lato', sans-serif;
+        }
+
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: var(--font-body);
+            background: #d0d0d0;
+            color: var(--text-dark);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ===== PAGE SETUP ===== */
+        .page {
+            width: 297mm;
+            height: 210mm;
+            position: relative;
+            overflow: hidden;
+            page-break-after: always;
+            margin: 20px auto;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.15);
+            display: flex;
+            flex-direction: row;
+        }
+        .page:last-of-type { page-break-after: auto; }
+
+        .half {
+            width: 50%;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 14mm 12mm;
+        }
+
+        .fold {
+            position: absolute;
+            top: 0; bottom: 0; left: 50%;
+            border-left: 1px dashed #bbb;
+            z-index: 50;
+            pointer-events: none;
+        }
+
+        /* ===== BACKGROUNDS ===== */
+        .bg-dark {
+            background: linear-gradient(160deg, #1E120B 0%, #2C1810 40%, #3A2419 70%, #2C1810 100%);
+        }
+        .bg-cream {
+            background: var(--cream);
+        }
+
+        /* ===== ORNAMENTAL BORDER ===== */
+        .ornate-border {
+            position: absolute;
+            inset: 6mm;
+            border: 1.5pt solid var(--gold);
+            pointer-events: none;
+            z-index: 2;
+        }
+        .ornate-border::before {
+            content: '';
+            position: absolute;
+            inset: 2.5mm;
+            border: 0.5pt solid var(--gold-light);
+            opacity: 0.6;
+        }
+        .ornate-border::after {
+            content: '';
+            position: absolute;
+            inset: 4.5mm;
+            border: 0.25pt solid var(--gold-light);
+            opacity: 0.3;
+        }
+
+        .bg-dark .ornate-border {
+            border-color: var(--gold-light);
+        }
+        .bg-dark .ornate-border::before {
+            border-color: var(--gold-pale);
+            opacity: 0.4;
+        }
+        .bg-dark .ornate-border::after {
+            border-color: var(--gold-pale);
+            opacity: 0.2;
+        }
+
+        /* ===== CORNER ORNAMENTS ===== */
+        .corner-ornament {
+            position: absolute;
+            width: 50mm;
+            height: 50mm;
+            z-index: 3;
+            pointer-events: none;
+        }
+        .corner-ornament.tl { top: 4mm; left: 4mm; }
+        .corner-ornament.tr { top: 4mm; right: 4mm; transform: scaleX(-1); }
+        .corner-ornament.bl { bottom: 4mm; left: 4mm; transform: scaleY(-1); }
+        .corner-ornament.br { bottom: 4mm; right: 4mm; transform: scale(-1); }
+
+        /* ===== DECORATIVE LINE ===== */
+        .gold-line {
+            width: 60%;
+            height: 0;
+            border-top: 0.5pt solid var(--gold);
+            margin: 3mm auto;
+            opacity: 0.6;
+        }
+        .gold-line-short {
+            width: 30%;
+            height: 0;
+            border-top: 0.5pt solid var(--gold);
+            margin: 2mm auto;
+            opacity: 0.5;
+        }
+
+        /* ===== TYPOGRAPHY ===== */
+        .t-aksara {
+            font-size: 11pt;
+            color: var(--gold-light);
+            letter-spacing: 2pt;
+            text-align: center;
+            margin-bottom: 2mm;
+        }
+        .t-subtitle {
+            font-family: var(--font-sans);
+            font-size: 7pt;
+            font-weight: 300;
+            letter-spacing: 4pt;
+            text-transform: uppercase;
+            text-align: center;
+            margin-bottom: 1mm;
+        }
+        .t-wedding-of {
+            font-family: var(--font-sans);
+            font-size: 6pt;
+            font-weight: 300;
+            letter-spacing: 5pt;
+            text-transform: uppercase;
+            text-align: center;
+            opacity: 0.7;
+        }
+        .t-name-cover {
+            font-family: var(--font-display);
+            font-size: 26pt;
+            font-weight: 700;
+            line-height: 1.3;
+            text-align: center;
+            color: var(--gold-pale);
+        }
+        .t-ampersand {
+            font-family: var(--font-display);
+            font-size: 20pt;
+            font-style: italic;
+            text-align: center;
+            color: var(--gold-light);
+            margin: 0.5mm 0;
+        }
+        .t-date-cover {
+            font-family: var(--font-sans);
+            font-size: 8pt;
+            font-weight: 300;
+            letter-spacing: 3pt;
+            text-align: center;
+            margin-top: 3mm;
+        }
+
+        /* Inner page typography */
+        .t-bismillah {
+            font-size: 14pt;
+            color: var(--gold);
+            text-align: center;
+            direction: rtl;
+            margin-bottom: 2mm;
+        }
+        .t-salam {
+            font-family: var(--font-sans);
+            font-size: 7.5pt;
+            font-weight: 400;
+            color: var(--text-body);
+            text-align: center;
+            letter-spacing: 0.5pt;
+        }
+        .t-verse {
+            font-family: var(--font-body);
+            font-style: italic;
+            font-size: 9pt;
+            color: var(--text-light);
+            text-align: center;
+            line-height: 1.7;
+            max-width: 90%;
+            margin: 0 auto;
+        }
+        .t-verse-ref {
+            font-family: var(--font-sans);
+            font-size: 6.5pt;
+            color: var(--text-light);
+            text-align: center;
+            margin-top: 1mm;
+            letter-spacing: 0.5pt;
+        }
+        .t-intro {
+            font-family: var(--font-body);
+            font-size: 9pt;
+            color: var(--text-body);
+            text-align: center;
+            line-height: 1.6;
+            max-width: 92%;
+            margin: 0 auto;
+        }
+        .t-couple-name {
+            font-family: var(--font-display);
+            font-size: 16pt;
+            font-weight: 700;
+            color: var(--brown-dark);
+            text-align: center;
+            line-height: 1.2;
+        }
+        .t-couple-full {
+            font-family: var(--font-sans);
+            font-size: 7pt;
+            font-weight: 400;
+            color: var(--text-light);
+            text-align: center;
+            letter-spacing: 0.3pt;
+        }
+        .t-couple-parents {
+            font-family: var(--font-body);
+            font-size: 8.5pt;
+            color: var(--text-body);
+            text-align: center;
+            line-height: 1.5;
+        }
+        .t-section-title {
+            font-family: var(--font-sans);
+            font-size: 7pt;
+            font-weight: 700;
+            letter-spacing: 4pt;
+            text-transform: uppercase;
+            color: var(--gold);
+            text-align: center;
+        }
+        .t-section-sub {
+            font-family: var(--font-display);
+            font-style: italic;
+            font-size: 12pt;
+            color: var(--brown-dark);
+            text-align: center;
+        }
+
+        /* ===== EVENT BOX ===== */
+        .event-box {
+            width: 92%;
+            border: 0.5pt solid var(--border-gold);
+            border-radius: 2mm;
+            padding: 3mm 4mm;
+            text-align: center;
+            margin: 1.5mm auto;
+            background: rgba(245, 230, 184, 0.15);
+        }
+        .event-box-title {
+            font-family: var(--font-sans);
+            font-size: 7pt;
+            font-weight: 700;
+            letter-spacing: 2pt;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 1.5mm;
+        }
+        .event-box-info {
+            font-family: var(--font-sans);
+            font-size: 7.5pt;
+            font-weight: 400;
+            color: var(--text-body);
+            line-height: 1.8;
+        }
+        .event-box-addr {
+            font-family: var(--font-sans);
+            font-size: 6.5pt;
+            color: var(--text-light);
+            line-height: 1.5;
+            margin-top: 1mm;
+        }
+
+        /* ===== GUEST NAME FIELD ===== */
+        .guest-field {
+            text-align: center;
+            width: 70%;
+            margin-top: 4mm;
+        }
+        .guest-field-label {
+            font-family: var(--font-sans);
+            font-size: 6.5pt;
+            font-weight: 300;
+            letter-spacing: 2pt;
+            text-transform: uppercase;
+            color: var(--gold-pale);
+            opacity: 0.8;
+            margin-bottom: 2mm;
+        }
+        .guest-field-line {
+            border-bottom: 0.5pt solid var(--gold-light);
+            height: 14pt;
+            width: 80%;
+            margin: 0 auto;
+        }
+        .guest-field-note {
+            font-family: var(--font-sans);
+            font-size: 5.5pt;
+            color: var(--gold-light);
+            opacity: 0.5;
+            margin-top: 1mm;
+            letter-spacing: 1pt;
+        }
+
+        /* ===== BACK COVER ===== */
+        .back-name {
+            font-family: var(--font-display);
+            font-size: 20pt;
+            font-weight: 700;
+            color: var(--gold-pale);
+            text-align: center;
+        }
+        .back-date {
+            font-family: var(--font-sans);
+            font-size: 9pt;
+            font-weight: 300;
+            color: var(--gold-light);
+            letter-spacing: 3pt;
+            text-align: center;
+            margin-top: 1.5mm;
+        }
+        .back-msg {
+            font-family: var(--font-body);
+            font-style: italic;
+            font-size: 9.5pt;
+            color: var(--gold-pale);
+            line-height: 1.7;
+            text-align: center;
+            max-width: 85%;
+            margin: 0 auto;
+        }
+        .back-closing {
+            font-family: var(--font-body);
+            font-size: 8.5pt;
+            color: var(--gold-light);
+            text-align: center;
+            line-height: 1.6;
+        }
+
+        /* ===== BANK BOX ===== */
+        .bank-box {
+            border: 0.5pt solid var(--gold-light);
+            border-radius: 2mm;
+            padding: 3mm 5mm;
+            text-align: center;
+            width: 75%;
+            background: rgba(212, 175, 55, 0.05);
+        }
+        .bank-label {
+            font-family: var(--font-sans);
+            font-size: 5.5pt;
+            letter-spacing: 3pt;
+            text-transform: uppercase;
+            color: var(--gold-light);
+            opacity: 0.7;
+        }
+        .bank-name {
+            font-family: var(--font-sans);
+            font-size: 8pt;
+            font-weight: 700;
+            color: var(--gold-pale);
+            letter-spacing: 1.5pt;
+            margin-top: 0.5mm;
+        }
+        .bank-number {
+            font-family: var(--font-sans);
+            font-size: 12pt;
+            font-weight: 700;
+            color: var(--cream);
+            letter-spacing: 1.5pt;
+            margin: 1mm 0;
+        }
+        .bank-owner {
+            font-family: var(--font-sans);
+            font-size: 7pt;
+            color: var(--gold-light);
+        }
+
+        /* ===== CLOSING SECTION ===== */
+        .closing-families {
+            font-family: var(--font-sans);
+            font-size: 7pt;
+            color: var(--text-body);
+            text-align: center;
+            line-height: 1.5;
+        }
+
+        /* ===== QR CODE ===== */
+        .qr-wrapper {
+            background: white;
+            padding: 2mm;
+            border-radius: 1.5mm;
+            border: 0.3pt solid rgba(200,169,110,0.3);
+            display: inline-block;
+        }
+        .qr-wrapper img {
+            width: 18mm;
+            height: 18mm;
+            display: block;
+        }
+
+        /* ===== HEART DIVIDER ===== */
+        .heart-divider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 2mm;
+            margin: 2mm 0;
+        }
+        .heart-divider .line {
+            width: 12mm;
+            height: 0;
+            border-top: 0.4pt solid var(--gold);
+            opacity: 0.5;
+        }
+        .heart-divider .heart {
+            color: var(--gold);
+            font-size: 8pt;
+        }
+
+        /* ===== PRINT ===== */
+        @media print {
+            body { background: none; }
+            .page { margin: 0; box-shadow: none; }
+            .fold { border-left-color: #ddd; }
+            .print-guide { display: none !important; }
+        }
+        @page { size: A4 landscape; margin: 0; }
+    </style>
+</head>
+<body>
+
+<!-- ================================================================ -->
+<!-- PAGE 1: OUTER (Front Cover LEFT + Back Cover RIGHT)              -->
+<!-- When printed double-sided and folded, front cover is outside     -->
+<!-- ================================================================ -->
+<div class="page">
+
+    <!-- ===== FRONT COVER (Left half of Page 1) ===== -->
+    <div class="half bg-dark">
+        <div class="ornate-border"></div>
+
+        <!-- Corner Ornaments -->
+        <svg class="corner-ornament tl" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M8 92 C8 45 45 8 92 8" stroke="#D4AF37" stroke-width="1" fill="none" opacity="0.8"/>
+            <path d="M14 86 C14 48 48 14 86 14" stroke="#D4AF37" stroke-width="0.5" fill="none" opacity="0.5"/>
+            <path d="M20 80 C20 50 50 20 80 20" stroke="#D4AF37" stroke-width="0.3" fill="none" opacity="0.3"/>
+            <!-- Floral curl top -->
+            <path d="M50 14 C52 10 56 8 60 10 C58 14 54 16 50 14Z" stroke="#D4AF37" stroke-width="0.4" fill="none" opacity="0.6"/>
+            <path d="M14 50 C10 52 8 56 10 60 C14 58 16 54 14 50Z" stroke="#D4AF37" stroke-width="0.4" fill="none" opacity="0.6"/>
+            <!-- Center diamond -->
+            <path d="M22 22 L28 16 L34 22 L28 28Z" stroke="#D4AF37" stroke-width="0.5" fill="none" opacity="0.5"/>
+            <circle cx="28" cy="22" r="2" stroke="#D4AF37" stroke-width="0.4" fill="none" opacity="0.4"/>
+        </svg>
+        <svg class="corner-ornament tr" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M8 92 C8 45 45 8 92 8" stroke="#D4AF37" stroke-width="1" fill="none" opacity="0.8"/>
+            <path d="M14 86 C14 48 48 14 86 14" stroke="#D4AF37" stroke-width="0.5" fill="none" opacity="0.5"/>
+            <path d="M20 80 C20 50 50 20 80 20" stroke="#D4AF37" stroke-width="0.3" fill="none" opacity="0.3"/>
+            <path d="M50 14 C52 10 56 8 60 10 C58 14 54 16 50 14Z" stroke="#D4AF37" stroke-width="0.4" fill="none" opacity="0.6"/>
+            <path d="M14 50 C10 52 8 56 10 60 C14 58 16 54 14 50Z" stroke="#D4AF37" stroke-width="0.4" fill="none" opacity="0.6"/>
+            <path d="M22 22 L28 16 L34 22 L28 28Z" stroke="#D4AF37" stroke-width="0.5" fill="none" opacity="0.5"/>
+            <circle cx="28" cy="22" r="2" stroke="#D4AF37" stroke-width="0.4" fill="none" opacity="0.4"/>
+        </svg>
+        <svg class="corner-ornament bl" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M8 92 C8 45 45 8 92 8" stroke="#D4AF37" stroke-width="1" fill="none" opacity="0.8"/>
+            <path d="M14 86 C14 48 48 14 86 14" stroke="#D4AF37" stroke-width="0.5" fill="none" opacity="0.5"/>
+            <path d="M20 80 C20 50 50 20 80 20" stroke="#D4AF37" stroke-width="0.3" fill="none" opacity="0.3"/>
+            <path d="M50 14 C52 10 56 8 60 10 C58 14 54 16 50 14Z" stroke="#D4AF37" stroke-width="0.4" fill="none" opacity="0.6"/>
+            <path d="M14 50 C10 52 8 56 10 60 C14 58 16 54 14 50Z" stroke="#D4AF37" stroke-width="0.4" fill="none" opacity="0.6"/>
+            <path d="M22 22 L28 16 L34 22 L28 28Z" stroke="#D4AF37" stroke-width="0.5" fill="none" opacity="0.5"/>
+            <circle cx="28" cy="22" r="2" stroke="#D4AF37" stroke-width="0.4" fill="none" opacity="0.4"/>
+        </svg>
+        <svg class="corner-ornament br" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M8 92 C8 45 45 8 92 8" stroke="#D4AF37" stroke-width="1" fill="none" opacity="0.8"/>
+            <path d="M14 86 C14 48 48 14 86 14" stroke="#D4AF37" stroke-width="0.5" fill="none" opacity="0.5"/>
+            <path d="M20 80 C20 50 50 20 80 20" stroke="#D4AF37" stroke-width="0.3" fill="none" opacity="0.3"/>
+            <path d="M50 14 C52 10 56 8 60 10 C58 14 54 16 50 14Z" stroke="#D4AF37" stroke-width="0.4" fill="none" opacity="0.6"/>
+            <path d="M14 50 C10 52 8 56 10 60 C14 58 16 54 14 50Z" stroke="#D4AF37" stroke-width="0.4" fill="none" opacity="0.6"/>
+            <path d="M22 22 L28 16 L34 22 L28 28Z" stroke="#D4AF37" stroke-width="0.5" fill="none" opacity="0.5"/>
+            <circle cx="28" cy="22" r="2" stroke="#D4AF37" stroke-width="0.4" fill="none" opacity="0.4"/>
+        </svg>
+
+        <!-- Content -->
+        <div style="position: relative; z-index: 5; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%;">
+
+            <!-- Top ornament -->
+            <svg width="80" height="20" viewBox="0 0 80 20" fill="none" style="margin-bottom: 3mm; opacity: 0.6;">
+                <path d="M5 10 Q20 2 40 10 Q60 18 75 10" stroke="#D4AF37" stroke-width="0.5" fill="none"/>
+                <circle cx="40" cy="10" r="2.5" stroke="#D4AF37" stroke-width="0.4" fill="none"/>
+                <circle cx="40" cy="10" r="1" fill="#D4AF37" opacity="0.3"/>
+            </svg>
+
+            <div class="t-aksara">꧋ꦱꦸꦫꦠ꧀ꦠꦶꦩ꧀ꦧꦭꦤ꧀꧋</div>
+
+            <div class="t-subtitle" style="color: var(--gold-pale);">Undangan Pernikahan</div>
+            <div class="t-wedding-of" style="color: var(--gold-light);">The Wedding of</div>
+
+            <div style="height: 4mm;"></div>
+
+            <!-- Decorative line -->
+            <svg width="140" height="6" viewBox="0 0 140 6" fill="none" style="margin: 1mm 0;">
+                <line x1="0" y1="3" x2="55" y2="3" stroke="#D4AF37" stroke-width="0.5" opacity="0.5"/>
+                <circle cx="60" cy="3" r="1.5" stroke="#D4AF37" stroke-width="0.4" fill="none" opacity="0.6"/>
+                <circle cx="70" cy="3" r="2" stroke="#D4AF37" stroke-width="0.5" fill="none" opacity="0.7"/>
+                <circle cx="70" cy="3" r="0.8" fill="#D4AF37" opacity="0.4"/>
+                <circle cx="80" cy="3" r="1.5" stroke="#D4AF37" stroke-width="0.4" fill="none" opacity="0.6"/>
+                <line x1="85" y1="3" x2="140" y2="3" stroke="#D4AF37" stroke-width="0.5" opacity="0.5"/>
+            </svg>
+
+            <div class="t-name-cover">Adriani Oktaviani</div>
+            <div class="t-ampersand">&amp;</div>
+            <div class="t-name-cover">Adhi Ardiansyah</div>
+
+            <!-- Decorative line -->
+            <svg width="140" height="6" viewBox="0 0 140 6" fill="none" style="margin: 1mm 0;">
+                <line x1="0" y1="3" x2="55" y2="3" stroke="#D4AF37" stroke-width="0.5" opacity="0.5"/>
+                <circle cx="60" cy="3" r="1.5" stroke="#D4AF37" stroke-width="0.4" fill="none" opacity="0.6"/>
+                <circle cx="70" cy="3" r="2" stroke="#D4AF37" stroke-width="0.5" fill="none" opacity="0.7"/>
+                <circle cx="70" cy="3" r="0.8" fill="#D4AF37" opacity="0.4"/>
+                <circle cx="80" cy="3" r="1.5" stroke="#D4AF37" stroke-width="0.4" fill="none" opacity="0.6"/>
+                <line x1="85" y1="3" x2="140" y2="3" stroke="#D4AF37" stroke-width="0.5" opacity="0.5"/>
+            </svg>
+
+            <div class="t-date-cover" style="color: var(--gold-pale);">Sabtu, 5 September 2026</div>
+
+            <div style="height: 5mm;"></div>
+
+            <!-- Guest name field -->
+            <div class="guest-field">
+                <div class="guest-field-label">Kepada Yth. Bapak/Ibu/Saudara/i</div>
+                <div class="guest-field-line"></div>
+                <div class="guest-field-note">di Tempat</div>
+            </div>
+
+            <!-- Bottom ornament -->
+            <svg width="60" height="16" viewBox="0 0 60 16" fill="none" style="margin-top: 4mm; opacity: 0.5;">
+                <path d="M10 8 Q20 3 30 8 Q40 13 50 8" stroke="#D4AF37" stroke-width="0.4" fill="none"/>
+                <circle cx="30" cy="8" r="2" stroke="#D4AF37" stroke-width="0.3" fill="none"/>
+            </svg>
+        </div>
+    </div>
+
+    <!-- FOLD LINE -->
+    <div class="fold"></div>
+
+    <!-- ===== BACK COVER (Right half of Page 1) ===== -->
+    <div class="half bg-dark">
+        <div class="ornate-border"></div>
+
+        <!-- Corner Ornaments -->
+        <svg class="corner-ornament tl" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M8 92 C8 45 45 8 92 8" stroke="#D4AF37" stroke-width="1" fill="none" opacity="0.8"/>
+            <path d="M14 86 C14 48 48 14 86 14" stroke="#D4AF37" stroke-width="0.5" fill="none" opacity="0.5"/>
+            <path d="M22 22 L28 16 L34 22 L28 28Z" stroke="#D4AF37" stroke-width="0.5" fill="none" opacity="0.5"/>
+            <circle cx="28" cy="22" r="2" stroke="#D4AF37" stroke-width="0.4" fill="none" opacity="0.4"/>
+        </svg>
+        <svg class="corner-ornament tr" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M8 92 C8 45 45 8 92 8" stroke="#D4AF37" stroke-width="1" fill="none" opacity="0.8"/>
+            <path d="M14 86 C14 48 48 14 86 14" stroke="#D4AF37" stroke-width="0.5" fill="none" opacity="0.5"/>
+            <path d="M22 22 L28 16 L34 22 L28 28Z" stroke="#D4AF37" stroke-width="0.5" fill="none" opacity="0.5"/>
+            <circle cx="28" cy="22" r="2" stroke="#D4AF37" stroke-width="0.4" fill="none" opacity="0.4"/>
+        </svg>
+        <svg class="corner-ornament bl" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M8 92 C8 45 45 8 92 8" stroke="#D4AF37" stroke-width="1" fill="none" opacity="0.8"/>
+            <path d="M14 86 C14 48 48 14 86 14" stroke="#D4AF37" stroke-width="0.5" fill="none" opacity="0.5"/>
+            <path d="M22 22 L28 16 L34 22 L28 28Z" stroke="#D4AF37" stroke-width="0.5" fill="none" opacity="0.5"/>
+            <circle cx="28" cy="22" r="2" stroke="#D4AF37" stroke-width="0.4" fill="none" opacity="0.4"/>
+        </svg>
+        <svg class="corner-ornament br" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M8 92 C8 45 45 8 92 8" stroke="#D4AF37" stroke-width="1" fill="none" opacity="0.8"/>
+            <path d="M14 86 C14 48 48 14 86 14" stroke="#D4AF37" stroke-width="0.5" fill="none" opacity="0.5"/>
+            <path d="M22 22 L28 16 L34 22 L28 28Z" stroke="#D4AF37" stroke-width="0.5" fill="none" opacity="0.5"/>
+            <circle cx="28" cy="22" r="2" stroke="#D4AF37" stroke-width="0.4" fill="none" opacity="0.4"/>
+        </svg>
+
+        <!-- Content -->
+        <div style="position: relative; z-index: 5; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; gap: 2mm;">
+
+            <!-- Top ornament -->
+            <svg width="60" height="16" viewBox="0 0 60 16" fill="none" style="opacity: 0.5;">
+                <path d="M10 8 Q20 3 30 8 Q40 13 50 8" stroke="#D4AF37" stroke-width="0.4" fill="none"/>
+                <circle cx="30" cy="8" r="2" stroke="#D4AF37" stroke-width="0.3" fill="none"/>
+            </svg>
+
+            <div class="back-name">Ayu &amp; Adhi</div>
+            <div class="back-date">5 · 09 · 2026</div>
+
+            <div class="gold-line" style="border-color: var(--gold-light); opacity: 0.3; width: 40%;"></div>
+
+            <div class="back-msg">
+                "Maha Suci Allah yang telah menciptakan<br>
+                makhluk-Nya berpasang-pasangan."
+            </div>
+            <div style="font-family: var(--font-sans); font-size: 6.5pt; color: var(--gold-light); opacity: 0.7; text-align: center;">
+                — QS. Yasin: 36
+            </div>
+
+            <div style="height: 2mm;"></div>
+
+            <div style="font-family: var(--font-body); font-style: italic; font-size: 9pt; color: var(--gold-pale); line-height: 1.7; text-align: center; max-width: 85%; opacity: 0.9;">
+                Merupakan suatu kebahagiaan dan kehormatan bagi kami,<br>
+                apabila Bapak/Ibu/Saudara/i berkenan hadir<br>
+                untuk memberikan doa restu kepada putra-putri kami.
+            </div>
+
+            <div style="height: 2mm;"></div>
+
+            <div class="back-closing">
+                Atas kehadiran dan doa restunya,<br>
+                kami mengucapkan terima kasih.
+            </div>
+
+            <div style="height: 3mm;"></div>
+
+            <div style="font-family: var(--font-body); font-style: italic; font-size: 8pt; color: var(--gold-light); text-align: center;">
+                Wassalamu'alaikum Wr. Wb.
+            </div>
+
+            <div style="color: var(--gold-light); font-size: 9pt; letter-spacing: 4pt; text-align: center;">♥ ♥ ♥</div>
+        </div>
+    </div>
+</div>
+
+<!-- ================================================================ -->
+<!-- PAGE 2: INNER (Left: Bismillah+Mempelai | Right: Detail Acara)   -->
+<!-- ================================================================ -->
+<div class="page">
+
+    <!-- ===== INNER LEFT (Bismillah + Couple) ===== -->
+    <div class="half bg-cream">
+        <div class="ornate-border"></div>
+
+        <!-- Corner Ornaments -->
+        <svg class="corner-ornament tl" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M8 92 C8 45 45 8 92 8" stroke="#B8860B" stroke-width="1" fill="none" opacity="0.7"/>
+            <path d="M14 86 C14 48 48 14 86 14" stroke="#B8860B" stroke-width="0.5" fill="none" opacity="0.4"/>
+            <path d="M50 14 C52 10 56 8 60 10 C58 14 54 16 50 14Z" stroke="#B8860B" stroke-width="0.4" fill="none" opacity="0.5"/>
+            <path d="M14 50 C10 52 8 56 10 60 C14 58 16 54 14 50Z" stroke="#B8860B" stroke-width="0.4" fill="none" opacity="0.5"/>
+            <path d="M22 22 L28 16 L34 22 L28 28Z" stroke="#B8860B" stroke-width="0.5" fill="none" opacity="0.4"/>
+            <circle cx="28" cy="22" r="2" stroke="#B8860B" stroke-width="0.4" fill="none" opacity="0.3"/>
+        </svg>
+        <svg class="corner-ornament tr" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M8 92 C8 45 45 8 92 8" stroke="#B8860B" stroke-width="1" fill="none" opacity="0.7"/>
+            <path d="M14 86 C14 48 48 14 86 14" stroke="#B8860B" stroke-width="0.5" fill="none" opacity="0.4"/>
+            <path d="M50 14 C52 10 56 8 60 10 C58 14 54 16 50 14Z" stroke="#B8860B" stroke-width="0.4" fill="none" opacity="0.5"/>
+            <path d="M14 50 C10 52 8 56 10 60 C14 58 16 54 14 50Z" stroke="#B8860B" stroke-width="0.4" fill="none" opacity="0.5"/>
+            <path d="M22 22 L28 16 L34 22 L28 28Z" stroke="#B8860B" stroke-width="0.5" fill="none" opacity="0.4"/>
+            <circle cx="28" cy="22" r="2" stroke="#B8860B" stroke-width="0.4" fill="none" opacity="0.3"/>
+        </svg>
+        <svg class="corner-ornament bl" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M8 92 C8 45 45 8 92 8" stroke="#B8860B" stroke-width="1" fill="none" opacity="0.7"/>
+            <path d="M14 86 C14 48 48 14 86 14" stroke="#B8860B" stroke-width="0.5" fill="none" opacity="0.4"/>
+            <path d="M22 22 L28 16 L34 22 L28 28Z" stroke="#B8860B" stroke-width="0.5" fill="none" opacity="0.4"/>
+            <circle cx="28" cy="22" r="2" stroke="#B8860B" stroke-width="0.4" fill="none" opacity="0.3"/>
+        </svg>
+        <svg class="corner-ornament br" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M8 92 C8 45 45 8 92 8" stroke="#B8860B" stroke-width="1" fill="none" opacity="0.7"/>
+            <path d="M14 86 C14 48 48 14 86 14" stroke="#B8860B" stroke-width="0.5" fill="none" opacity="0.4"/>
+            <path d="M22 22 L28 16 L34 22 L28 28Z" stroke="#B8860B" stroke-width="0.5" fill="none" opacity="0.4"/>
+            <circle cx="28" cy="22" r="2" stroke="#B8860B" stroke-width="0.4" fill="none" opacity="0.3"/>
+        </svg>
+
+        <!-- Content -->
+        <div style="position: relative; z-index: 5; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; gap: 1.5mm;">
+
+            <!-- Bismillah -->
+            <div class="t-bismillah">بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيْمِ</div>
+
+            <div class="t-salam">Assalamu'alaikum Warahmatullahi Wabarakatuh</div>
+
+            <div class="gold-line-short"></div>
+
+            <!-- Quran Verse -->
+            <div class="t-verse">
+                "Dan di antara tanda-tanda (kebesaran)-Nya ialah Dia menciptakan pasangan-pasangan untukmu dari jenismu sendiri, agar kamu cenderung dan merasa tenteram kepadanya, dan Dia menjadikan di antaramu rasa kasih dan sayang."
+            </div>
+            <div class="t-verse-ref">— QS. Ar-Rum: 21</div>
+
+            <div class="gold-line"></div>
+
+            <!-- Introductory text -->
+            <div class="t-intro">
+                Dengan memohon Rahmat dan Ridho Allah SWT, kami bermaksud menyelenggarakan Walimatul 'Ursy putra-putri kami:
+            </div>
+
+            <div style="height: 1.5mm;"></div>
+
+            <!-- Bride -->
+            <div class="t-couple-name">Adriani Oktaviani</div>
+            <div class="t-couple-full">Ns. Adriani Oktaviani Ayu Wangi, S. Kep.</div>
+            <div class="t-couple-parents" style="margin-top: 0.5mm;">
+                Putri dari Bapak Muhamad Adnan<br>&amp; Ibu Mujiati
+            </div>
+
+            <!-- Heart divider -->
+            <div class="heart-divider">
+                <div class="line"></div>
+                <div class="heart">♥</div>
+                <div class="line"></div>
+            </div>
+
+            <!-- Groom -->
+            <div class="t-couple-name">Adhi Ardiansyah</div>
+            <div class="t-couple-full">Adhi Ardiansyah, A.Md.Kom.</div>
+            <div class="t-couple-parents" style="margin-top: 0.5mm;">
+                Putra dari Bapak Mohammad Zaenal Fanani<br>&amp; Ibu Aminingsih
+            </div>
+
+            <div class="gold-line"></div>
+
+            <!-- Closing text -->
+            <div style="font-family: var(--font-body); font-style: italic; font-size: 8pt; color: var(--text-light); text-align: center; line-height: 1.6; max-width: 90%;">
+                Untuk itu kami mengharap kehadiran serta doa restu dari Bapak/Ibu/Saudara/i pada acara yang Insya Allah akan diselenggarakan pada:
+            </div>
+        </div>
+    </div>
+
+    <!-- FOLD LINE -->
+    <div class="fold"></div>
+
+    <!-- ===== INNER RIGHT (Event Details) ===== -->
+    <div class="half bg-cream">
+        <div class="ornate-border"></div>
+
+        <!-- Corner Ornaments -->
+        <svg class="corner-ornament tl" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M8 92 C8 45 45 8 92 8" stroke="#B8860B" stroke-width="1" fill="none" opacity="0.7"/>
+            <path d="M14 86 C14 48 48 14 86 14" stroke="#B8860B" stroke-width="0.5" fill="none" opacity="0.4"/>
+            <path d="M50 14 C52 10 56 8 60 10 C58 14 54 16 50 14Z" stroke="#B8860B" stroke-width="0.4" fill="none" opacity="0.5"/>
+            <path d="M14 50 C10 52 8 56 10 60 C14 58 16 54 14 50Z" stroke="#B8860B" stroke-width="0.4" fill="none" opacity="0.5"/>
+            <path d="M22 22 L28 16 L34 22 L28 28Z" stroke="#B8860B" stroke-width="0.5" fill="none" opacity="0.4"/>
+            <circle cx="28" cy="22" r="2" stroke="#B8860B" stroke-width="0.4" fill="none" opacity="0.3"/>
+        </svg>
+        <svg class="corner-ornament tr" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M8 92 C8 45 45 8 92 8" stroke="#B8860B" stroke-width="1" fill="none" opacity="0.7"/>
+            <path d="M14 86 C14 48 48 14 86 14" stroke="#B8860B" stroke-width="0.5" fill="none" opacity="0.4"/>
+            <path d="M50 14 C52 10 56 8 60 10 C58 14 54 16 50 14Z" stroke="#B8860B" stroke-width="0.4" fill="none" opacity="0.5"/>
+            <path d="M14 50 C10 52 8 56 10 60 C14 58 16 54 14 50Z" stroke="#B8860B" stroke-width="0.4" fill="none" opacity="0.5"/>
+            <path d="M22 22 L28 16 L34 22 L28 28Z" stroke="#B8860B" stroke-width="0.5" fill="none" opacity="0.4"/>
+            <circle cx="28" cy="22" r="2" stroke="#B8860B" stroke-width="0.4" fill="none" opacity="0.3"/>
+        </svg>
+        <svg class="corner-ornament bl" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M8 92 C8 45 45 8 92 8" stroke="#B8860B" stroke-width="1" fill="none" opacity="0.7"/>
+            <path d="M14 86 C14 48 48 14 86 14" stroke="#B8860B" stroke-width="0.5" fill="none" opacity="0.4"/>
+            <path d="M22 22 L28 16 L34 22 L28 28Z" stroke="#B8860B" stroke-width="0.5" fill="none" opacity="0.4"/>
+            <circle cx="28" cy="22" r="2" stroke="#B8860B" stroke-width="0.4" fill="none" opacity="0.3"/>
+        </svg>
+        <svg class="corner-ornament br" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M8 92 C8 45 45 8 92 8" stroke="#B8860B" stroke-width="1" fill="none" opacity="0.7"/>
+            <path d="M14 86 C14 48 48 14 86 14" stroke="#B8860B" stroke-width="0.5" fill="none" opacity="0.4"/>
+            <path d="M22 22 L28 16 L34 22 L28 28Z" stroke="#B8860B" stroke-width="0.5" fill="none" opacity="0.4"/>
+            <circle cx="28" cy="22" r="2" stroke="#B8860B" stroke-width="0.4" fill="none" opacity="0.3"/>
+        </svg>
+
+        <!-- Content -->
+        <div style="position: relative; z-index: 5; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; gap: 1.5mm;">
+
+            <div class="t-section-title">Waktu &amp; Tempat</div>
+            <div class="t-section-sub">Pelaksanaan Acara</div>
+
+            <div class="gold-line-short"></div>
+
+            <!-- Akad Nikah -->
+            <div class="event-box">
+                <div class="event-box-title">Akad Nikah</div>
+                <div class="event-box-info">
+                    Hari/Tanggal : Sabtu, 5 September 2026<br>
+                    Pukul : 08.00 — 10.00 WIB<br>
+                    Tempat : Kediaman Mempelai Wanita
+                </div>
+            </div>
+
+            <!-- Resepsi -->
+            <div class="event-box">
+                <div class="event-box-title">Walimatul 'Ursy (Resepsi)</div>
+                <div class="event-box-info">
+                    Hari/Tanggal : Sabtu, 5 September 2026<br>
+                    Pukul : 10.00 — 16.00 WIB<br>
+                    Tempat : Kediaman Mempelai Wanita
+                </div>
+            </div>
+
+            <div class="gold-line-short"></div>
+
+            <!-- Alamat -->
+            <div style="text-align: center; width: 90%;">
+                <div style="font-family: var(--font-sans); font-size: 7pt; font-weight: 700; letter-spacing: 2pt; text-transform: uppercase; color: var(--gold); margin-bottom: 1.5mm;">Alamat Lokasi</div>
+                <div style="font-family: var(--font-sans); font-size: 7.5pt; color: var(--text-body); line-height: 1.6;">
+                    Perumahan Taman Jatisari Permai<br>
+                    Jl. Semeru 2 Blok DI No. 18-19<br>
+                    RT.002/RW.016, Jatisari, Kec. Jatiasih<br>
+                    Kota Bekasi, Jawa Barat 17426
+                </div>
+            </div>
+
+            <div class="gold-line-short"></div>
+
+            <!-- QR Code Maps -->
+            <div style="text-align: center;">
+                <div style="font-family: var(--font-sans); font-size: 6pt; color: var(--text-light); letter-spacing: 1.5pt; text-transform: uppercase; margin-bottom: 1.5mm;">Scan untuk Lokasi</div>
+                <div class="qr-wrapper">
+                    <img src="maps-qr.svg" alt="QR Code Maps">
+                </div>
+            </div>
+
+            <div class="gold-line"></div>
+
+            <!-- Closing -->
+            <div style="font-family: var(--font-body); font-style: italic; font-size: 8pt; color: var(--text-body); text-align: center; line-height: 1.6; max-width: 90%;">
+                Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir untuk memberikan doa restu kepada kedua mempelai.
+            </div>
+
+            <div style="font-family: var(--font-sans); font-size: 7.5pt; color: var(--text-body); text-align: center;">
+                Wassalamu'alaikum Warahmatullahi Wabarakatuh
+            </div>
+
+            <div style="height: 1.5mm;"></div>
+
+            <!-- Hormat Kami -->
+            <div style="font-family: var(--font-display); font-style: italic; font-size: 8.5pt; color: var(--text-dark); text-align: center;">
+                Kami yang berbahagia,
+            </div>
+            <div class="closing-families">
+                Kel. Bp. Muhamad Adnan &amp; Kel. Bp. Moh. Zaenal Fanani
+            </div>
+
+            <!-- Bottom ornament -->
+            <svg width="60" height="12" viewBox="0 0 60 12" fill="none" style="margin-top: 1mm; opacity: 0.4;">
+                <path d="M10 6 Q20 2 30 6 Q40 10 50 6" stroke="#B8860B" stroke-width="0.4" fill="none"/>
+                <circle cx="30" cy="6" r="1.5" stroke="#B8860B" stroke-width="0.3" fill="none"/>
+            </svg>
+        </div>
+    </div>
+</div>
+
+<!-- ================================================================ -->
+<!-- PRINT GUIDE                                                       -->
+<!-- ================================================================ -->
+<div class="print-guide" style="max-width: 297mm; margin: 20px auto; padding: 24px; background: #fff; border: 1px solid #ddd; border-radius: 8px; font-family: 'Lato', sans-serif; font-size: 13px; color: #333; line-height: 1.8;">
+    <h2 style="color: var(--brown-dark); margin-bottom: 12px; font-size: 16px;">📋 Instruksi Cetak Undangan</h2>
+    <ol style="padding-left: 20px;">
+        <li><strong>Halaman 1</strong> (Luar: Sampul Depan + Belakang) → Cetak A4 Landscape</li>
+        <li><strong>Halaman 2</strong> (Dalam: Bismillah/Mempelai + Detail Acara) → Balik kertas, cetak sisi belakang</li>
+        <li><strong>Lipat</strong> kertas tepat di tengah (garis putus-putus)</li>
+        <li>Hasil akhir: Undangan <strong>A5 (148 × 210 mm)</strong> dengan 4 panel</li>
+    </ol>
+    <div style="margin-top: 14px; padding: 12px 16px; background: #FDFAF0; border-radius: 6px; border-left: 3px solid var(--gold);">
+        <strong>💡 Tips Cetak:</strong>
+        <ul style="padding-left: 16px; margin-top: 8px; list-style: disc;">
+            <li>Kertas: <strong>Art Carton 260gsm</strong> atau <strong>Ivory 260gsm</strong></li>
+            <li>Setting printer: <strong>Fit to page</strong>, <strong>Landscape</strong>, <strong>Double-sided (flip on short edge)</strong></li>
+            <li>Simpan sebagai PDF: <strong>Ctrl+P → Save as PDF</strong></li>
+            <li>Untuk hasil profesional: cetak di percetakan dengan finishing <strong>laminasi doff + hotprint emas</strong></li>
+        </ul>
+    </div>
+</div>
+
+</body>
+</html>
