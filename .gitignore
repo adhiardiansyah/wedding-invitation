@@ -8,6 +8,7 @@ Undangan-Pernikahan-Ayu-Adhi-5-September-2026.pdf
 
 # Editor
 .vscode/
+.playwright-mcp/
 
 # OS
 .DS_Store
