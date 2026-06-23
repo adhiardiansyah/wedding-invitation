@@ -1,31 +1,36 @@
-# 💍 Wedding Invitation — Ayu & Adhi
+# 💍 Wedding Invitation — Adriani & Adhi
 
-Undangan pernikahan digital & fisik untuk **Ns. Adriani Oktaviani Ayu Wangi, S. Kep.** & **Adhi Ardiansyah, A.Md.Kom.**
+Undangan pernikahan digital & fisik untuk **Ns. Adriani Oktaviani Ayu Wangi, S.Kep.** & **Adhi Ardiansyah, A.Md.Kom.**
 
 📅 **Sabtu, 5 September 2026**
 
-🔗 **Live:** [adhiardiansyah.github.io/wedding-invitation](https://adhiardiansyah.github.io/wedding-invitation/)
+🔗 **Live:** [adhiardiansyah.github.io/wedding-invitation](https://adhiardiansyah.github.io/wedding-invitation/?to=Budi+Santoso)
 
 ---
 
 ## ✨ Fitur
 
-### Undangan Digital (Web)
-- Tema Jawa modern mewah — gebyok frame, gunungan wayang, batik kawung, melati petals
-- Responsive mobile & desktop
-- Auto-play musik latar
-- Personalisasi nama tamu via URL (`?to=Nama+Tamu`)
+### Undangan Digital
+- Tema Jawa 3D — warna coklat gelap/gold, ornamen Jawa, background image per section
+- Opening: foto pengantin full-screen + tombol "Buka Undangan"
+- Video opening animation (mp4) dengan reveal teks setelah video selesai
+- Desktop: split layout (kiri statis ornamen Jawa + kanan scrollable)
+- Mobile: full-width responsive
+- Firebase RSVP & ucapan realtime
+- Background musik + toggle
 - Countdown hitung mundur
-- RSVP & ucapan realtime (Firebase)
-- Galeri foto, love story timeline
-- Amplop digital
+- Bottom navigation
+- Scroll reveal animations
+- Floating melati petals
+- URL personalization (`?to=Nama+Tamu`)
 
 ### Undangan Fisik (Cetak)
 - Layout A4 landscape, dilipat menjadi A5
-- 4 panel: Cover, Back Cover, Bismillah+Mempelai, Detail Acara
-- Desain elegan warna coklat tua + gold
-- QR code lokasi Google Maps
-- Generate PDF otomatis via script
+- 4 panel: Cover, Back Cover, Isi Mempelai+Acara, Lokasi+QR
+- Desain matching undangan digital (coklat gelap + gold)
+- Background ornamen Jawa (webp/png)
+- Denah lokasi SVG + QR code
+- Generate PDF otomatis via Puppeteer
 
 ---
 
@@ -33,21 +38,15 @@ Undangan pernikahan digital & fisik untuk **Ns. Adriani Oktaviani Ayu Wangi, S. 
 
 ### Undangan Digital
 
-Sudah live di GitHub Pages. Untuk personalisasi link tamu:
-
+Sudah live di GitHub Pages:
 ```
-https://adhiardiansyah.github.io/wedding-invitation/?to=Budi+Santoso
+https://adhiardiansyah.github.io/wedding-invitation/?to=Nama+Tamu
 ```
 
 ### Undangan Fisik
 
-Lihat panduan lengkap di [PETUNJUK-CETAK.md](PETUNJUK-CETAK.md).
-
 ```bash
-# Install dependency (sekali saja)
 npm install
-
-# Generate PDF
 node generate-pdf.js
 ```
 
@@ -59,20 +58,27 @@ Hasil: `undangan-fisik.pdf` — siap cetak.
 
 ```
 wedding-invitation/
-├── index.html              # Undangan digital (single-file)
-├── undangan-fisik.html     # Undangan fisik (layout cetak)
-├── generate-pdf.js         # Script konversi HTML → PDF
-├── maps-qr.svg             # QR code lokasi
-├── FIREBASE_SETUP.md       # Panduan setup Firebase
-├── PETUNJUK-CETAK.md       # Panduan cetak undangan fisik
-├── package.json            # Dependencies (puppeteer-core)
-├── README.md               # Dokumentasi ini
+├── index.html                    # Undangan digital
+├── undangan-fisik.html           # Undangan fisik (layout cetak)
+├── generate-pdf.js               # Script HTML → PDF
+├── maps-qr.svg                   # QR code lokasi
+├── package.json                  # Dependencies
+├── README.md
+├── PETUNJUK-CETAK.md
+├── FIREBASE_SETUP.md
 └── assets/
-    ├── music.mp3           # Musik latar
-    └── images/
-        ├── bride.jpg       # Foto mempelai wanita
-        ├── groom.jpg       # Foto mempelai pria
-        └── photo-*.jpg     # Foto galeri
+    ├── bg/                       # Background ornamen Jawa
+    │   ├── BACKGROUND-GREEN-PII.webp
+    │   ├── P7-COUPLE-REV-PII.webp
+    │   ├── SUJA-ACARA-BG2-PII.webp
+    │   ├── SUJA-CVR-DSKTP-PII-scaled-1-1.webp
+    │   └── SUJA-REDD-BACK-SCALED-PII.png
+    ├── images/
+    │   ├── background.jpg        # Foto pengantin (opening + cover)
+    │   ├── bride.jpg             # Foto mempelai wanita
+    │   └── groom.jpg             # Foto mempelai pria
+    ├── music.mp3                 # Musik latar
+    └── PREMIUM-VINTAGE-07-1.mp4  # Video opening animation
 ```
 
 ---
@@ -80,15 +86,18 @@ wedding-invitation/
 ## 🛠️ Kustomisasi
 
 ### Foto
-Simpan di `assets/images/`:
-- `bride.jpg` & `groom.jpg` — foto mempelai
-- `photo-1.jpg` s/d `photo-5.jpg` — foto galeri
+- `assets/images/background.jpg` — foto utama pengantin
+- `assets/images/bride.jpg` & `groom.jpg` — foto mempelai individual
 
 ### Musik
 Ganti file `assets/music.mp3`
 
-### Personalisasi URL
-Parameter yang didukung: `?to=`, `?nama=`, `?untuk=`
+### URL Personalisasi
+```
+?to=Nama+Tamu
+?nama=Nama+Tamu
+?untuk=Nama+Tamu
+```
 
 ---
 
@@ -96,14 +105,14 @@ Parameter yang didukung: `?to=`, `?nama=`, `?untuk=`
 
 | Detail | Info |
 |--------|------|
-| **Mempelai Wanita** | Ns. Adriani Oktaviani Ayu Wangi, S. Kep. |
+| **Mempelai Wanita** | Ns. Adriani Oktaviani Ayu Wangi, S.Kep. |
 | **Mempelai Pria** | Adhi Ardiansyah, A.Md.Kom. |
-| **Orang Tua Wanita** | Bapak Muhamad Adnan & Ibu Mujiati |
-| **Orang Tua Pria** | Bapak Mohammad Zaenal Fanani & Ibu Aminingsih |
+| **Orang Tua Wanita** | Bapak Muhamad Adnan, S.E. & Ibu Mujiati |
+| **Orang Tua Pria** | Bapak Mohammad Zaenal Fanani, S.P. & Ibu Aminingsih |
 | **Tanggal** | Sabtu, 5 September 2026 |
-| **Akad Nikah** | 08.00 — 10.00 WIB |
-| **Resepsi** | 10.00 — 16.00 WIB |
-| **Lokasi** | Perumahan Taman Jatisari Permai, Jl. Semeru 2 Blok DI No. 18-19, RT.002/RW.016, Jatisari, Kec. Jatiasih, Kota Bekasi, Jawa Barat 17426 |
+| **Akad Nikah** | 08:00 — 10:00 WIB |
+| **Resepsi** | 10:00 — 16:00 WIB |
+| **Lokasi** | Taman Jatisari Permai, Jl. Semeru 2 Blok DI No. 18-19, RT.002/RW.016, Kel. Jatisari, Kec. Jatiasih, Kota Bekasi, Jawa Barat 17426 |
 | **Maps** | [Google Maps](https://maps.app.goo.gl/x8h9EpjDU6npPFGR8) |
 
 ---
