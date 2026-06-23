@@ -576,9 +576,131 @@
             .gallery-grid { grid-template-columns: repeat(3, 1fr); }
             .countdown-box { min-width: 90px; padding: 20px 16px; }
         }
+
+        /* ===== DESKTOP SPLIT LAYOUT ===== */
+        @media (min-width: 1024px) {
+            body {
+                display: flex;
+                flex-direction: row;
+            }
+
+            /* Left panel: static background with couple info */
+            .desktop-left {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 60%;
+                height: 100vh;
+                background: url('assets/bg/SUJA-CVR-DSKTP-PII-scaled-1-1.webp') center/cover no-repeat;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+                z-index: 1;
+                padding: 40px;
+            }
+            .desktop-left .dl-subtitle {
+                font-family: 'Crimson Text', serif;
+                font-style: italic;
+                font-size: 1.2rem;
+                color: var(--med-brown);
+                margin-bottom: 8px;
+            }
+            .desktop-left .dl-photo {
+                width: 160px;
+                height: 200px;
+                border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%;
+                overflow: hidden;
+                border: 3px solid rgba(107,74,53,0.4);
+                box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+                margin: 16px 0;
+            }
+            .desktop-left .dl-photo img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+            .desktop-left .dl-names {
+                font-family: 'Crimson Text', serif;
+                font-size: 2.2rem;
+                font-weight: 700;
+                color: var(--dark-brown);
+                letter-spacing: 2px;
+                margin-bottom: 6px;
+            }
+            .desktop-left .dl-date {
+                font-family: 'Crimson Text', serif;
+                font-style: italic;
+                font-size: 1rem;
+                color: var(--med-brown);
+            }
+
+            /* Right panel: scrollable content */
+            .desktop-right {
+                margin-left: 60%;
+                width: 40%;
+                min-height: 100vh;
+                position: relative;
+                z-index: 2;
+            }
+
+            /* Opening overlay only covers right panel on desktop */
+            #opening {
+                position: fixed;
+                top: 0;
+                left: 60%;
+                right: 0;
+                bottom: 0;
+                width: 40%;
+            }
+
+            /* Video section fills right panel */
+            #bukaUndangan {
+                width: 100%;
+            }
+
+            /* Sections constrained to right panel */
+            section {
+                max-width: 100%;
+                padding: 60px 24px;
+            }
+
+            /* Bottom nav only on right panel */
+            #bottomNav {
+                left: 60%;
+                width: 40%;
+            }
+
+            /* Music button repositioned */
+            #musicBtn {
+                right: calc(40% - 60px);
+            }
+
+            /* Hide left panel elements on mobile */
+            .desktop-left { display: flex; }
+        }
+
+        @media (max-width: 1023px) {
+            .desktop-left { display: none; }
+            .desktop-right { width: 100%; margin-left: 0; }
+        }
     </style>
 </head>
 <body>
+    <!-- ===== DESKTOP LEFT PANEL (static, only visible on desktop) ===== -->
+    <div class="desktop-left">
+        <p class="dl-subtitle">The Wedding of</p>
+        <div class="dl-photo">
+            <img src="assets/images/background.jpg" alt="Ayu & Adhi">
+        </div>
+        <p class="dl-names">AYU & ADHI</p>
+        <p class="dl-date">Sabtu, 5 September 2026</p>
+    </div>
+
+    <!-- ===== RIGHT PANEL (scrollable content) ===== -->
+    <div class="desktop-right">
+
     <!-- Background Music -->
     <audio id="bgMusic" loop preload="auto">
         <source src="assets/music.mp3" type="audio/mpeg">
@@ -624,10 +746,13 @@
     </section>
 
     <!-- Bismillah Section -->
-    <section id="bismillah" class="fade-up">
+    <section id="bismillah" class="fade-up" style="background: url('assets/bg/SUJA-ACARA-BG2-PII.webp') center/cover no-repeat; position: relative;">
+        <div style="position:absolute;inset:0;background:rgba(42,21,6,0.55);"></div>
+        <div style="position:relative;z-index:1;">
         <p class="bismillah-text">&#65010;</p>
         <p class="quran-text">"Dan di antara tanda-tanda (kebesaran)-Nya ialah Dia menciptakan pasangan-pasangan untukmu dari jenismu sendiri, agar kamu cenderung dan merasa tenteram kepadanya, dan Dia menjadikan di antaramu rasa kasih dan sayang."</p>
         <p class="quran-ref">— QS. Ar-Rum: 21 —</p>
+        </div>
     </section>
     <!-- Couple Section -->
     <section id="mempelai" class="fade-up" style="background: url('assets/bg/P7-COUPLE-REV-PII.webp') center/cover no-repeat; padding: 80px 20px; position: relative;">
@@ -677,7 +802,9 @@
     </section>
 
     <!-- Events Section -->
-    <section id="acara" class="fade-up">
+    <section id="acara" class="fade-up" style="background: url('assets/bg/SUJA-ACARA-BG2-PII.webp') center/cover no-repeat; position: relative;">
+        <div style="position:absolute;inset:0;background:rgba(42,21,6,0.6);"></div>
+        <div style="position:relative;z-index:1;">
         <p class="section-title">Acara</p>
         <div class="event-card">
             <h3>Akad Nikah</h3>
@@ -693,6 +820,7 @@
             <p style="margin-top:8px;">Perumahan Taman Jatisari Permai, Jl. Semeru 2 Blok DI No. 18-19, RT.002/RW.016, Jatisari, Kec. Jatiasih, Kota Bekasi, Jawa Barat 17426</p>
             <a href="https://maps.app.goo.gl/x8h9EpjDU6npPFGR8" target="_blank" class="btn-maps">&#128205; Google Maps</a>
         </div>
+        </div>
     </section>
     <!-- Gallery Section -->
     <section id="galeri" class="fade-up" style="background: url('assets/bg/SUJA-REDD-BACK-SCALED-PII.png') center/cover no-repeat; position: relative;">
@@ -704,7 +832,9 @@
     </section>
 
     <!-- Love Story Section -->
-    <section id="story" class="fade-up" style="background: linear-gradient(180deg, #1a0d03 0%, #2A1506 50%, #3d1f0c 100%);">
+    <section id="story" class="fade-up" style="background: url('assets/bg/SUJA-REDD-BACK-SCALED-PII.png') center/cover no-repeat; position: relative;">
+        <div style="position:absolute;inset:0;background:rgba(42,21,6,0.65);"></div>
+        <div style="position:relative;z-index:1;">
         <p class="section-title">Love Story</p>
         <div class="story-item">
             <h4>Awal Bertemu</h4>
@@ -721,6 +851,7 @@
         <div class="story-item">
             <h4>Hari Bahagia</h4>
             <p>Alhamdulillah, kami akan menyatukan cinta dalam ikatan suci pernikahan pada 5 September 2026.</p>
+        </div>
         </div>
     </section>
 
@@ -829,9 +960,8 @@
             musicBtn.textContent = '\u266B';
         }).catch(() => {});
 
-        // Show music button and nav
+        // Show music button (nav shown after video)
         musicBtn.classList.remove('hidden');
-        bottomNav.classList.remove('hidden');
 
         // Hide opening
         opening.style.opacity = '0';
@@ -866,10 +996,13 @@
         // Play video
         introVideo.play().catch(() => {});
 
-        // Show overlay text after 14 seconds
+        // Show overlay text and bottom nav after video ends
         setTimeout(() => {
             videoOverlay.classList.add('show');
         }, 14000);
+        setTimeout(() => {
+            bottomNav.classList.remove('hidden');
+        }, 18000);
 
         // Create petals
         createPetals();
@@ -1043,5 +1176,7 @@
         }
     }
     </script>
+
+    </div><!-- end desktop-right -->
 </body>
 </html>
