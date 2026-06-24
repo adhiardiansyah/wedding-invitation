@@ -19,7 +19,7 @@
         h1, h2, h3 { font-family: 'Crimson Text', serif; }
         /* Text readability on background images */
         .half p, .half h1, .half h2, .half div {
-            text-shadow: 0 0 6px rgba(0,0,0,0.7), 0 1px 3px rgba(0,0,0,0.5);
+            text-shadow: none;
         }
         .page {
             width: 297mm; height: 210mm;
@@ -45,14 +45,14 @@
         .half > * { position: relative; z-index: 2; }
         /* Page 1 backgrounds */
         .front-cover::before { background-image: url('assets/bg/SUJA-ACARA-BG2-PII.webp'); }
-        .front-cover::after { background: rgba(42,21,6,0.68); }
+        .front-cover::after { background: rgba(42,21,6,0.45); }
         .back-cover::before { background-image: url('assets/bg/SUJA-ACARA-BG2-PII.webp'); }
-        .back-cover::after { background: rgba(42,21,6,0.65); }
+        .back-cover::after { background: rgba(42,21,6,0.4); }
         /* Page 2 backgrounds */
         .inner-left::before { background-image: url('assets/bg/P7-COUPLE-REV-PII.webp'); }
-        .inner-left::after { background: rgba(42,21,6,0.65); }
+        .inner-left::after { background: rgba(42,21,6,0.4); }
         .inner-right::before { background-image: url('assets/bg/SUJA-REDD-BACK-SCALED-PII.png'); }
-        .inner-right::after { background: rgba(42,21,6,0.68); }
+        .inner-right::after { background: rgba(42,21,6,0.45); }
         /* Fold line */
         .fold-line {
             position: absolute; left: 50%; top: 0; height: 100%;
@@ -139,6 +139,7 @@
 
     <!-- BACK COVER (Right Half) -->
     <div class="half back-cover text-center">
+        <div style="background:rgba(42,21,6,0.6); border-radius:4mm; padding:8mm 6mm; width:88%; max-width:125mm;">
         <div class="monogram">A &amp; A</div>
         <p style="font-family:'Crimson Text',serif; font-size:8.5pt; color:var(--gold-light); font-style:italic; line-height:1.6; max-width:110mm; margin-bottom:4mm;">
             "Maha Suci Allah yang telah menciptakan makhluk-Nya berpasang-pasangan."<br>
@@ -153,6 +154,7 @@
         <p style="font-size:8pt; color:var(--gold-light); margin-bottom:3mm;">Wassalamu'alaikum Wr. Wb.</p>
         <div class="divider-short"></div>
         <p style="font-family:'Crimson Text',serif; font-size:13pt; color:var(--gold); margin-top:2mm;">Adriani &amp; Adhi</p>
+        </div>
     </div>
 </div>
 
@@ -162,6 +164,7 @@
 
     <!-- INNER LEFT: Mempelai & Acara -->
     <div class="half inner-left text-center">
+        <div style="background:rgba(42,21,6,0.7); border-radius:4mm; padding:8mm 6mm; width:90%; max-width:130mm;">
         <p style="font-family:'Crimson Text',serif; font-size:12pt; color:var(--gold); margin-bottom:1mm;">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيم</p>
         <p style="font-size:7.5pt; color:var(--gold-light); margin-bottom:2mm;">Assalamu'alaikum Warahmatullahi Wabarakatuh</p>
         <p style="font-size:7pt; color:var(--cream); line-height:1.5; max-width:120mm; margin-bottom:3mm;">
@@ -201,10 +204,12 @@
         <p style="font-size:6.5pt; color:var(--gold-light); line-height:1.5; max-width:115mm; margin-top:2mm;">
             Turut mengundang:<br>Keluarga Besar Bapak Muhamad Adnan, S.E. &amp; Keluarga Besar Bapak Mohammad Zaenal Fanani, S.P.
         </p>
+        </div>
     </div>
 
     <!-- INNER RIGHT: Lokasi & QR -->
     <div class="half inner-right text-center">
+        <div style="background:rgba(42,21,6,0.65); border-radius:4mm; padding:6mm 5mm; width:90%; max-width:130mm;">
         <h2 style="font-size:12pt; color:var(--gold); letter-spacing:1.5px; margin-bottom:2mm;">LOKASI ACARA</h2>
         <p style="font-family:'Crimson Text',serif; font-size:10pt; color:var(--gold); margin-bottom:1mm;">Taman Jatisari Permai</p>
         <p style="font-size:7pt; color:var(--cream); line-height:1.5; max-width:115mm; margin-bottom:3mm;">
@@ -249,6 +254,7 @@
         <div class="qr-section">
             <img src="maps-qr.svg" alt="QR Code Lokasi">
             <p style="font-size:6.5pt; color:var(--gold-light); margin-top:1mm;">Scan untuk Lokasi</p>
+        </div>
         </div>
     </div>
 </div>
