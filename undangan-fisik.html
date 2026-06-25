@@ -45,9 +45,9 @@
         .half > * { position: relative; z-index: 2; }
         /* Page 1 backgrounds */
         .front-cover::before { background-image: url('assets/bg/SUJA-ACARA-BG2-PII.webp'); }
-        .front-cover::after { background: rgba(42,21,6,0.45); }
+        .front-cover::after { background: rgba(42,21,6,0.15); }
         .back-cover::before { background-image: url('assets/bg/SUJA-ACARA-BG2-PII.webp'); }
-        .back-cover::after { background: rgba(42,21,6,0.4); }
+        .back-cover::after { background: rgba(42,21,6,0.15); }
         /* Page 2 backgrounds */
         .inner-left::before { background-image: url('assets/bg/P7-COUPLE-REV-PII.webp'); }
         .inner-left::after { background: rgba(42,21,6,0.4); }
@@ -79,12 +79,12 @@
             border: 1.5px solid var(--gold);
             display: flex; align-items: center; justify-content: center;
             font-family: 'Crimson Text', serif; font-size: 14pt;
-            color: var(--gold); margin-bottom: 4mm;
+            color: var(--gold); margin: 0 auto 4mm;
         }
         /* Guest line */
         .guest-line {
-            width: 50mm; border-bottom: 0.5px solid var(--gold-light);
-            margin: 2mm auto; height: 6mm;
+            width: 60mm; border-bottom: 1px solid #8B6542;
+            margin: 3mm auto; height: 8mm;
         }
         /* Event boxes */
         .event-row {
@@ -128,33 +128,32 @@
 
     <!-- FRONT COVER (Left Half) -->
     <div class="half front-cover text-center">
-        <p style="font-family:'Crimson Text',serif; font-size:10pt; color:var(--gold-light); font-style:italic; margin-bottom:2mm;">The Wedding of</p>
-        <h1 style="font-size:24pt; color:var(--gold); font-weight:700; letter-spacing:2px; margin-bottom:2mm;">ADRIANI &amp; ADHI</h1>
-        <p style="font-size:9pt; color:var(--gold-light); margin-bottom:4mm;">Sabtu, 5 September 2026</p>
-        <div class="divider"></div>
-        <p style="font-size:8pt; color:var(--gold-light); margin-top:6mm;">Kepada Yth. Bapak/Ibu/Saudara/i</p>
-        <div class="guest-line"></div>
-        <p style="font-size:7pt; color:var(--gold-light); opacity:0.8;">di Tempat</p>
+        <p style="font-family:'Crimson Text',serif; font-size:13pt; color:#5A3A1A; font-style:italic; margin-bottom:3mm;">The Wedding of</p>
+        <h1 style="font-size:30pt; color:#2A1506; font-weight:700; letter-spacing:2px; margin-bottom:3mm;">ADRIANI &amp; ADHI</h1>
+        <p style="font-size:11pt; color:#5A3A1A; margin-bottom:5mm;">Sabtu, 5 September 2026</p>
+        <div class="divider" style="background:#8B6542;"></div>
+        <p style="font-size:10pt; color:#5A3A1A; margin-top:8mm;">Kepada Yth. Bapak/Ibu/Saudara/i</p>
+        <div class="guest-line" style="border-color:#8B6542;"></div>
+        <div class="guest-line" style="border-color:#8B6542;"></div>
+        <p style="font-size:9pt; color:#5A3A1A; opacity:0.7; margin-top:1mm;">di Tempat</p>
     </div>
 
     <!-- BACK COVER (Right Half) -->
     <div class="half back-cover text-center">
-        <div style="background:rgba(42,21,6,0.6); border-radius:4mm; padding:8mm 6mm; width:88%; max-width:125mm;">
-        <div class="monogram">A &amp; A</div>
-        <p style="font-family:'Crimson Text',serif; font-size:8.5pt; color:var(--gold-light); font-style:italic; line-height:1.6; max-width:110mm; margin-bottom:4mm;">
+        <div class="monogram" style="border-color:#5A3A1A; color:#5A3A1A; margin: 0 auto 4mm;">A &amp; A</div>
+        <p style="font-family:'Crimson Text',serif; font-size:9.5pt; color:#3A2A1A; font-style:italic; line-height:1.7; max-width:110mm; margin-bottom:4mm;">
             "Maha Suci Allah yang telah menciptakan makhluk-Nya berpasang-pasangan."<br>
-            <span style="font-size:7.5pt;">— QS. Yasin: 36</span>
+            <span style="font-size:8pt;">— QS. Yasin: 36</span>
         </p>
-        <p style="font-size:8pt; color:var(--cream); line-height:1.6; max-width:110mm; margin-bottom:3mm;">
+        <p style="font-size:9pt; color:#3A2A1A; line-height:1.7; max-width:110mm; margin-bottom:3mm;">
             Merupakan suatu kebahagiaan dan kehormatan bagi kami, apabila Bapak/Ibu/Saudara/i berkenan hadir untuk memberikan doa restu kepada kedua mempelai.
         </p>
-        <p style="font-size:8pt; color:var(--cream); line-height:1.6; max-width:110mm; margin-bottom:4mm;">
+        <p style="font-size:9pt; color:#3A2A1A; line-height:1.7; max-width:110mm; margin-bottom:4mm;">
             Atas kehadiran dan doa restunya, kami mengucapkan terima kasih.
         </p>
-        <p style="font-size:8pt; color:var(--gold-light); margin-bottom:3mm;">Wassalamu'alaikum Wr. Wb.</p>
-        <div class="divider-short"></div>
-        <p style="font-family:'Crimson Text',serif; font-size:13pt; color:var(--gold); margin-top:2mm;">Adriani &amp; Adhi</p>
-        </div>
+        <p style="font-size:9pt; color:#5A3A1A; margin-bottom:3mm;">Wassalamu'alaikum Wr. Wb.</p>
+        <div class="divider-short" style="background:#8B6542;"></div>
+        <p style="font-family:'Crimson Text',serif; font-size:14pt; color:#2A1506; margin-top:2mm; font-weight:700;">Adriani &amp; Adhi</p>
     </div>
 </div>
 
@@ -220,33 +219,43 @@
 
         <!-- Denah SVG -->
         <div class="map-container">
-            <svg viewBox="0 0 300 170" xmlns="http://www.w3.org/2000/svg">
-                <!-- Roads -->
-                <rect x="10" y="75" width="280" height="12" fill="rgba(200,169,110,0.15)" stroke="var(--gold)" stroke-width="0.5" rx="1"/>
-                <text x="150" y="84" font-size="6" fill="#E8D5A3" text-anchor="middle" font-family="Quicksand,sans-serif">Jl. Rinjani Raya</text>
+            <svg viewBox="0 0 300 180" xmlns="http://www.w3.org/2000/svg">
+                <!-- Jl. Rinjani Raya (horizontal atas) -->
+                <rect x="10" y="15" width="280" height="10" fill="rgba(200,169,110,0.15)" stroke="var(--gold)" stroke-width="0.5" rx="1"/>
+                <text x="150" y="23" font-size="5.5" fill="#E8D5A3" text-anchor="middle" font-family="Quicksand,sans-serif">Jl. Rinjani Raya</text>
 
-                <rect x="60" y="20" width="10" height="140" fill="rgba(200,169,110,0.1)" stroke="var(--gold)" stroke-width="0.4" rx="1"/>
-                <text x="65" y="16" font-size="5" fill="#E8D5A3" text-anchor="middle" font-family="Quicksand,sans-serif">Jl. Semeru 1</text>
+                <!-- Jl. Semeru Raya (horizontal bawah) -->
+                <rect x="10" y="155" width="280" height="10" fill="rgba(200,169,110,0.15)" stroke="var(--gold)" stroke-width="0.5" rx="1"/>
+                <text x="150" y="163" font-size="5.5" fill="#E8D5A3" text-anchor="middle" font-family="Quicksand,sans-serif">Jl. Semeru Raya</text>
 
-                <rect x="120" y="20" width="10" height="140" fill="rgba(200,169,110,0.1)" stroke="var(--gold)" stroke-width="0.4" rx="1"/>
-                <text x="125" y="16" font-size="5" fill="#E8D5A3" text-anchor="middle" font-family="Quicksand,sans-serif">Jl. Semeru 2</text>
+                <!-- Jalan horizontal tengah (antar blok) -->
+                <rect x="30" y="85" width="250" height="6" fill="rgba(200,169,110,0.08)" stroke="var(--gold)" stroke-width="0.3" rx="1"/>
+                <rect x="30" y="120" width="250" height="6" fill="rgba(200,169,110,0.08)" stroke="var(--gold)" stroke-width="0.3" rx="1"/>
 
-                <rect x="180" y="20" width="10" height="140" fill="rgba(200,169,110,0.1)" stroke="var(--gold)" stroke-width="0.4" rx="1"/>
-                <text x="185" y="16" font-size="5" fill="#E8D5A3" text-anchor="middle" font-family="Quicksand,sans-serif">Jl. Semeru 3</text>
+                <!-- Jl. Semeru 1 (vertikal) -->
+                <rect x="35" y="25" width="8" height="130" fill="rgba(200,169,110,0.1)" stroke="var(--gold)" stroke-width="0.4" rx="1"/>
+                <text x="39" y="12" font-size="4.5" fill="#E8D5A3" text-anchor="middle" font-family="Quicksand,sans-serif">Jl. Semeru 1</text>
 
-                <rect x="240" y="20" width="10" height="140" fill="rgba(200,169,110,0.1)" stroke="var(--gold)" stroke-width="0.4" rx="1"/>
-                <text x="245" y="16" font-size="5" fill="#E8D5A3" text-anchor="middle" font-family="Quicksand,sans-serif">Jl. Semeru 4</text>
+                <!-- Jl. Semeru 2 (vertikal) -->
+                <rect x="90" y="25" width="8" height="130" fill="rgba(200,169,110,0.1)" stroke="var(--gold)" stroke-width="0.4" rx="1"/>
+                <text x="94" y="12" font-size="4.5" fill="#E8D5A3" text-anchor="middle" font-family="Quicksand,sans-serif">Jl. Semeru 2</text>
 
-                <rect x="10" y="130" width="280" height="10" fill="rgba(200,169,110,0.1)" stroke="var(--gold)" stroke-width="0.4" rx="1"/>
-                <text x="150" y="138" font-size="5" fill="#E8D5A3" text-anchor="middle" font-family="Quicksand,sans-serif">Jl. Pangrango</text>
+                <!-- Jl. Semeru 3 (vertikal) -->
+                <rect x="150" y="25" width="8" height="130" fill="rgba(200,169,110,0.1)" stroke="var(--gold)" stroke-width="0.4" rx="1"/>
+                <text x="154" y="12" font-size="4.5" fill="#E8D5A3" text-anchor="middle" font-family="Quicksand,sans-serif">Jl. Semeru 3</text>
 
-                <rect x="10" y="30" width="280" height="10" fill="rgba(200,169,110,0.1)" stroke="var(--gold)" stroke-width="0.4" rx="1"/>
-                <text x="150" y="38" font-size="5" fill="#E8D5A3" text-anchor="middle" font-family="Quicksand,sans-serif">Jl. Semeru Raya</text>
+                <!-- Jl. Semeru IV (vertikal) -->
+                <rect x="210" y="25" width="8" height="130" fill="rgba(200,169,110,0.1)" stroke="var(--gold)" stroke-width="0.4" rx="1"/>
+                <text x="214" y="12" font-size="4.5" fill="#E8D5A3" text-anchor="middle" font-family="Quicksand,sans-serif">Jl. Semeru IV</text>
 
-                <!-- Location marker -->
-                <circle cx="125" cy="105" r="5" fill="var(--gold)" opacity="0.9"/>
-                <circle cx="125" cy="105" r="8" fill="none" stroke="var(--gold)" stroke-width="0.7" opacity="0.5"/>
-                <text x="125" y="120" font-size="5.5" fill="#C8A96E" text-anchor="middle" font-weight="600" font-family="Quicksand,sans-serif">Lokasi</text>
+                <!-- Jl. Pangrango I (vertikal paling kanan) -->
+                <rect x="265" y="25" width="8" height="130" fill="rgba(200,169,110,0.1)" stroke="var(--gold)" stroke-width="0.4" rx="1"/>
+                <text x="269" y="12" font-size="4.5" fill="#E8D5A3" text-anchor="middle" font-family="Quicksand,sans-serif">Jl. Pangrango 1</text>
+
+                <!-- Location marker (di Jl. Semeru 2, area atas) -->
+                <circle cx="80" cy="50" r="6" fill="var(--gold)" opacity="0.9"/>
+                <circle cx="80" cy="50" r="9" fill="none" stroke="var(--gold)" stroke-width="0.8" opacity="0.5"/>
+                <text x="80" y="68" font-size="5" fill="#C8A96E" text-anchor="middle" font-weight="700" font-family="Quicksand,sans-serif">LOKASI</text>
             </svg>
         </div>
 
