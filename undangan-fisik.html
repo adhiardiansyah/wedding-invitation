@@ -104,8 +104,15 @@
         }
         /* Map */
         .map-container { margin: 3mm 0; }
-        .map-container svg {
-            width: 80mm; height: 45mm;
+        .map-card {
+            background: #ffffff;
+            border-radius: 2mm;
+            padding: 2mm;
+            box-shadow: 0 0 0 0.5mm rgba(200,169,110,0.6);
+            margin: 2mm auto;
+        }
+        .map-card svg {
+            width: 104mm; height: 82mm; display: block;
         }
         .qr-section { text-align: center; margin-top: 3mm; }
         .qr-section img { width: 20mm; height: 20mm; }
@@ -208,55 +215,131 @@
 
     <!-- INNER RIGHT: Lokasi & QR -->
     <div class="half inner-right text-center">
-        <div style="background:rgba(42,21,6,0.65); border-radius:4mm; padding:6mm 5mm; width:90%; max-width:130mm;">
+        <div style="background:rgba(42,21,6,0.65); border-radius:4mm; padding:5mm 4mm; width:94%; max-width:135mm;">
         <h2 style="font-size:12pt; color:var(--gold); letter-spacing:1.5px; margin-bottom:2mm;">LOKASI ACARA</h2>
-        <p style="font-family:'Crimson Text',serif; font-size:10pt; color:var(--gold); margin-bottom:1mm;">Taman Jatisari Permai</p>
-        <p style="font-size:7pt; color:var(--cream); line-height:1.5; max-width:115mm; margin-bottom:3mm;">
-            Jl. Semeru 2 Blok DI No. 18-19, RT.002/RW.016,<br>
-            Kel. Jatisari, Kec. Jatiasih, Kota Bekasi,<br>
-            Jawa Barat 17426
-        </p>
 
-        <!-- Denah SVG -->
+        <!-- Denah SVG: peta rute sesuai kondisi asli (utara di atas) -->
         <div class="map-container">
-            <svg viewBox="0 0 300 180" xmlns="http://www.w3.org/2000/svg">
-                <!-- Jl. Rinjani Raya (horizontal atas) -->
-                <rect x="10" y="15" width="280" height="10" fill="rgba(200,169,110,0.15)" stroke="var(--gold)" stroke-width="0.5" rx="1"/>
-                <text x="150" y="23" font-size="5.5" fill="#E8D5A3" text-anchor="middle" font-family="Quicksand,sans-serif">Jl. Rinjani Raya</text>
+            <div class="map-card">
+            <svg viewBox="0 0 600 470" xmlns="http://www.w3.org/2000/svg" font-family="Quicksand,sans-serif">
+                <!-- frame -->
+                <rect x="5" y="5" width="590" height="460" fill="#ffffff" stroke="#111" stroke-width="3"/>
 
-                <!-- Jl. Semeru Raya (horizontal bawah) -->
-                <rect x="10" y="155" width="280" height="10" fill="rgba(200,169,110,0.15)" stroke="var(--gold)" stroke-width="0.5" rx="1"/>
-                <text x="150" y="163" font-size="5.5" fill="#E8D5A3" text-anchor="middle" font-family="Quicksand,sans-serif">Jl. Semeru Raya</text>
+                <!--
+                  UTARA di atas. LOKASI di tengah (Jl. Semeru 2).
+                  Patokan wilayah: TMII (kiri-atas), Gerbang Tol Jatiasih (kanan-atas),
+                  Pondok Gede (kiri-bawah), Cibubur (kanan-bawah), Kota Bekasi (kanan).
+                -->
 
-                <!-- Jalan horizontal tengah (antar blok) -->
-                <rect x="30" y="85" width="250" height="6" fill="rgba(200,169,110,0.08)" stroke="var(--gold)" stroke-width="0.3" rx="1"/>
-                <rect x="30" y="120" width="250" height="6" fill="rgba(200,169,110,0.08)" stroke="var(--gold)" stroke-width="0.3" rx="1"/>
+                <!-- ============ ROADS (black outline under, white fill over) ============ -->
+                <g stroke-linecap="butt" fill="none">
+                    <g stroke="#111">
+                        <path d="M 180 155 L 470 155" stroke-width="18"/>   <!-- Rinjani Raya -->
+                        <path d="M 80 330 L 520 330" stroke-width="20"/>     <!-- Nyai Dewi Mayangsari / Semeru Raya -->
+                        <path d="M 300 155 L 300 400" stroke-width="16"/>    <!-- Jl. Semeru 2 (lokasi) -->
+                        <path d="M 150 155 L 150 400" stroke-width="16"/>    <!-- Jl. Wibawa Mukti II -->
+                        <path d="M 450 155 L 450 400" stroke-width="16"/>    <!-- Jl. Semeru 3 -->
+                        <path d="M 150 155 L 72 74" stroke-width="14"/>      <!-- ke Gerbang Tol -->
+                        <path d="M 450 155 L 528 74" stroke-width="14"/>     <!-- ke Kota Bekasi -->
+                        <path d="M 150 400 L 72 408" stroke-width="14"/>     <!-- ke Trans Studio Mall -->
+                        <path d="M 450 400 L 528 408" stroke-width="14"/>    <!-- ke Living World -->
+                        <path d="M 360 330 L 360 372" stroke-width="11"/>    <!-- ke STIKES -->
+                    </g>
+                    <g stroke="#ffffff">
+                        <path d="M 180 155 L 470 155" stroke-width="11"/>
+                        <path d="M 80 330 L 520 330" stroke-width="12"/>
+                        <path d="M 300 155 L 300 400" stroke-width="9"/>
+                        <path d="M 150 155 L 150 400" stroke-width="9"/>
+                        <path d="M 450 155 L 450 400" stroke-width="9"/>
+                        <path d="M 150 155 L 72 74" stroke-width="8"/>
+                        <path d="M 450 155 L 528 74" stroke-width="8"/>
+                        <path d="M 150 400 L 72 408" stroke-width="8"/>
+                        <path d="M 450 400 L 528 408" stroke-width="8"/>
+                        <path d="M 360 330 L 360 372" stroke-width="6"/>
+                    </g>
+                    <!-- cyan highlighted route: Gerbang Tol -> Wibawa Mukti II -> Semeru Raya -> Semeru 2 -> lokasi -->
+                    <path d="M 72 80 L 150 155 L 150 330 L 300 330 L 300 245" stroke="#4FD0DA" stroke-width="8"/>
+                </g>
 
-                <!-- Jl. Semeru 1 (vertikal) -->
-                <rect x="35" y="25" width="8" height="130" fill="rgba(200,169,110,0.1)" stroke="var(--gold)" stroke-width="0.4" rx="1"/>
-                <text x="39" y="12" font-size="4.5" fill="#E8D5A3" text-anchor="middle" font-family="Quicksand,sans-serif">Jl. Semeru 1</text>
+                <!-- ============ ROAD LABELS (white halo) ============ -->
+                <g fill="#111" font-weight="700" style="paint-order:stroke;stroke:#ffffff;stroke-width:5;stroke-linejoin:round;">
+                    <text x="240" y="150" font-size="11.5" text-anchor="middle">Jl. Rinjani Raya</text>
+                    <text x="200" y="349" font-size="10" text-anchor="middle">Jl. Nyai Dewi Mayangsari</text>
+                    <text x="385" y="349" font-size="11.5" text-anchor="middle">Jl. Semeru Raya</text>
+                    <text x="288" y="255" font-size="10.5" text-anchor="middle" transform="rotate(-90 288 255)">Jl. Semeru 2</text>
+                    <text x="138" y="255" font-size="10.5" text-anchor="middle" transform="rotate(-90 138 255)">Jl. Wibawa Mukti II</text>
+                    <text x="438" y="255" font-size="10.5" text-anchor="middle" transform="rotate(-90 438 255)">Jl. Semeru 3</text>
+                </g>
 
-                <!-- Jl. Semeru 2 (vertikal) -->
-                <rect x="90" y="25" width="8" height="130" fill="rgba(200,169,110,0.1)" stroke="var(--gold)" stroke-width="0.4" rx="1"/>
-                <text x="94" y="12" font-size="4.5" fill="#E8D5A3" text-anchor="middle" font-family="Quicksand,sans-serif">Jl. Semeru 2</text>
+                <!-- ============ COMPASS (kiri) ============ -->
+                <g transform="translate(45,240)">
+                    <polygon points="0,-22 6,0 0,22 -6,0" fill="#111"/>
+                    <polygon points="0,-22 6,0 0,0" fill="#666"/>
+                    <text x="0" y="-27" font-size="14" text-anchor="middle" font-weight="700" fill="#111" style="paint-order:stroke;stroke:#fff;stroke-width:4;">U</text>
+                </g>
 
-                <!-- Jl. Semeru 3 (vertikal) -->
-                <rect x="150" y="25" width="8" height="130" fill="rgba(200,169,110,0.1)" stroke="var(--gold)" stroke-width="0.4" rx="1"/>
-                <text x="154" y="12" font-size="4.5" fill="#E8D5A3" text-anchor="middle" font-family="Quicksand,sans-serif">Jl. Semeru 3</text>
+                <!-- ============ LANDMARKS (patokan wilayah) ============ -->
+                <!-- Gerbang Tol Jatiasih (kiri-atas, nyambung Jl. Wibawa Mukti II) -->
+                <g transform="translate(72,60)">
+                    <rect x="-22" y="-13" width="44" height="26" rx="2" fill="#FFE1A8" stroke="#111" stroke-width="2.4"/>
+                    <line x1="-7" y1="-13" x2="-7" y2="13" stroke="#111" stroke-width="1.8"/>
+                    <line x1="7" y1="-13" x2="7" y2="13" stroke="#111" stroke-width="1.8"/>
+                </g>
+                <text x="72" y="92" font-size="10.5" text-anchor="middle" font-weight="700" fill="#111" style="paint-order:stroke;stroke:#fff;stroke-width:5;stroke-linejoin:round;">Gerbang Tol</text>
+                <text x="72" y="105" font-size="10.5" text-anchor="middle" font-weight="700" fill="#111" style="paint-order:stroke;stroke:#fff;stroke-width:5;stroke-linejoin:round;">Jatiasih</text>
 
-                <!-- Jl. Semeru IV (vertikal) -->
-                <rect x="210" y="25" width="8" height="130" fill="rgba(200,169,110,0.1)" stroke="var(--gold)" stroke-width="0.4" rx="1"/>
-                <text x="214" y="12" font-size="4.5" fill="#E8D5A3" text-anchor="middle" font-family="Quicksand,sans-serif">Jl. Semeru IV</text>
+                <!-- Kota Bekasi (kanan-atas) -->
+                <g transform="translate(535,60)">
+                    <rect x="-15" y="-15" width="30" height="28" rx="2" fill="#CBD8F2" stroke="#111" stroke-width="2.4"/>
+                    <line x1="-15" y1="-5" x2="15" y2="-5" stroke="#111" stroke-width="1.3"/>
+                    <line x1="0" y1="-15" x2="0" y2="13" stroke="#111" stroke-width="1.3"/>
+                </g>
+                <text x="535" y="92" font-size="10.5" text-anchor="middle" font-weight="700" fill="#111" style="paint-order:stroke;stroke:#fff;stroke-width:5;stroke-linejoin:round;">Kota Bekasi</text>
 
-                <!-- Jl. Pangrango I (vertikal paling kanan) -->
-                <rect x="265" y="25" width="8" height="130" fill="rgba(200,169,110,0.1)" stroke="var(--gold)" stroke-width="0.4" rx="1"/>
-                <text x="269" y="12" font-size="4.5" fill="#E8D5A3" text-anchor="middle" font-family="Quicksand,sans-serif">Jl. Pangrango 1</text>
+                <!-- Trans Studio Mall Cibubur (kiri-bawah) -->
+                <g transform="translate(72,404)">
+                    <rect x="-16" y="-14" width="32" height="28" rx="2" fill="#BFE6C3" stroke="#111" stroke-width="2.4"/>
+                    <line x1="-16" y1="-4" x2="16" y2="-4" stroke="#111" stroke-width="1.3"/>
+                    <line x1="-16" y1="6" x2="16" y2="6" stroke="#111" stroke-width="1.3"/>
+                    <line x1="0" y1="-14" x2="0" y2="14" stroke="#111" stroke-width="1.3"/>
+                </g>
+                <text x="72" y="433" font-size="9.5" text-anchor="middle" font-weight="700" fill="#111" style="paint-order:stroke;stroke:#fff;stroke-width:5;stroke-linejoin:round;">Trans Studio</text>
+                <text x="72" y="445" font-size="9.5" text-anchor="middle" font-weight="700" fill="#111" style="paint-order:stroke;stroke:#fff;stroke-width:5;stroke-linejoin:round;">Mall Cibubur</text>
 
-                <!-- Location marker (di Jl. Semeru 2, area atas) -->
-                <circle cx="80" cy="50" r="6" fill="var(--gold)" opacity="0.9"/>
-                <circle cx="80" cy="50" r="9" fill="none" stroke="var(--gold)" stroke-width="0.8" opacity="0.5"/>
-                <text x="80" y="68" font-size="5" fill="#C8A96E" text-anchor="middle" font-weight="700" font-family="Quicksand,sans-serif">LOKASI</text>
+                <!-- Living World Kota Wisata Cibubur (kanan-bawah) -->
+                <g transform="translate(535,404)">
+                    <rect x="-17" y="-11" width="34" height="9" rx="1.5" fill="#FFD9A0" stroke="#111" stroke-width="2.2"/>
+                    <rect x="-17" y="-1" width="34" height="9" rx="1.5" fill="#FFD9A0" stroke="#111" stroke-width="2.2"/>
+                </g>
+                <text x="535" y="433" font-size="9.5" text-anchor="middle" font-weight="700" fill="#111" style="paint-order:stroke;stroke:#fff;stroke-width:5;stroke-linejoin:round;">Living World Kota</text>
+                <text x="535" y="445" font-size="9.5" text-anchor="middle" font-weight="700" fill="#111" style="paint-order:stroke;stroke:#fff;stroke-width:5;stroke-linejoin:round;">Wisata Cibubur</text>
+
+                <!-- STIKES Persada Husada (di Jl. Semeru Raya) -->
+                <g transform="translate(360,378)">
+                    <rect x="-14" y="-12" width="28" height="22" rx="2" fill="#CBD8F2" stroke="#111" stroke-width="2.2"/>
+                    <path d="M -14 -12 L 0 -20 L 14 -12 Z" fill="#CBD8F2" stroke="#111" stroke-width="1.8"/>
+                </g>
+                <text x="360" y="405" font-size="9" text-anchor="middle" font-weight="700" fill="#111" style="paint-order:stroke;stroke:#fff;stroke-width:5;stroke-linejoin:round;">STIKES Persada Husada</text>
+
+                <!-- ============ ORANGE ADDRESS CALLOUT (atas-tengah) ============ -->
+                <path d="M 300 120 L 300 190" stroke="#F4A62A" stroke-width="4"/>
+                <g>
+                    <rect x="188" y="20" width="224" height="100" rx="12" fill="#FBB040" stroke="#E89A1C" stroke-width="2"/>
+                    <text x="300" y="45" font-size="17" text-anchor="middle" font-weight="700" fill="#3a2400">LOKASI</text>
+                    <text x="300" y="65" font-size="13.5" text-anchor="middle" font-weight="700" fill="#3a2400">Taman Jatisari Permai</text>
+                    <text x="300" y="83" font-size="10" text-anchor="middle" fill="#4a2f00">Jl. Semeru 2 Blok DI No. 18-19,</text>
+                    <text x="300" y="97" font-size="10" text-anchor="middle" fill="#4a2f00">RT.002/RW.016, Kel. Jatisari,</text>
+                    <text x="300" y="111" font-size="10" text-anchor="middle" fill="#4a2f00">Kec. Jatiasih, Kota Bekasi 17426</text>
+                </g>
+
+                <!-- ============ RED LOCATION PIN (venue, tengah) ============ -->
+                <g transform="translate(300,235)">
+                    <ellipse cx="0" cy="8" rx="12" ry="3.5" fill="#000" opacity="0.18"/>
+                    <path d="M 0 8 C 0 8 -19 -17 -19 -29 C -19 -41 -10 -50 0 -50 C 10 -50 19 -41 19 -29 C 19 -17 0 8 0 8 Z" fill="#E23B2E" stroke="#B02318" stroke-width="1.5"/>
+                    <circle cx="0" cy="-30" r="7.5" fill="#ffffff"/>
+                </g>
             </svg>
+            </div>
         </div>
 
         <!-- QR Code -->
