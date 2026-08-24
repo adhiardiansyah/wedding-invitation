@@ -365,6 +365,50 @@
             object-fit: cover;
             border-radius: 12px;
             border: 2px solid rgba(200,169,110,0.3);
+            cursor: zoom-in;
+            transition: transform 0.2s ease;
+        }
+        .gallery-grid img:hover {
+            transform: scale(1.02);
+        }
+        .lightbox {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.85);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            padding: 20px;
+            cursor: zoom-out;
+        }
+        .lightbox.active {
+            display: flex;
+        }
+        .lightbox img {
+            max-width: 95vw;
+            max-height: 90vh;
+            object-fit: contain;
+            border-radius: 8px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+            cursor: default;
+        }
+        .lightbox-close {
+            position: absolute;
+            top: 16px;
+            right: 20px;
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 2rem;
+            line-height: 1;
+            cursor: pointer;
+            padding: 4px 12px;
+            border-radius: 50%;
+            transition: background 0.2s ease;
+        }
+        .lightbox-close:hover {
+            background: rgba(255, 255, 255, 0.15);
         }
         .gallery-placeholder {
             width: 100%;
@@ -1044,10 +1088,41 @@
     // Gallery with fallback
     (function() {
         const grid = document.getElementById('galleryGrid');
-        for (let i = 1; i <= 7; i++) {
+
+        // Lightbox element (created once)
+        const lightbox = document.createElement('div');
+        lightbox.className = 'lightbox';
+        lightbox.innerHTML = '<button class="lightbox-close" aria-label="Close">&times;</button><img alt="Preview">';
+        const lightboxImg = lightbox.querySelector('img');
+        const lightboxClose = lightbox.querySelector('.lightbox-close');
+        document.body.appendChild(lightbox);
+
+        function openLightbox(src, alt) {
+            lightboxImg.src = src;
+            lightboxImg.alt = alt;
+            lightbox.classList.add('active');
+        }
+        function closeLightbox() {
+            lightbox.classList.remove('active');
+        }
+        lightbox.addEventListener('click', function(e) {
+            if (e.target === lightbox) closeLightbox();
+        });
+        lightboxClose.addEventListener('click', closeLightbox);
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && lightbox.classList.contains('active')) closeLightbox();
+        });
+
+        for (let i = 1; i <= 8; i++) {
             const img = document.createElement('img');
             img.src = 'assets/images/' + i + '.jpg';
             img.alt = 'Gallery ' + i;
+            img.loading = 'lazy';
+            img.addEventListener('click', function() {
+                if (img.complete && img.naturalWidth > 0) {
+                    openLightbox(img.src, img.alt);
+                }
+            });
             img.onerror = function() {
                 const placeholder = document.createElement('div');
                 placeholder.className = 'gallery-placeholder';
