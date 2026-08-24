@@ -112,7 +112,7 @@ Ganti file `assets/music.mp3`
 | **Tanggal** | Sabtu, 5 September 2026 |
 | **Akad Nikah** | 08:00 — 10:00 WIB |
 | **Resepsi** | 10:00 — 16:00 WIB |
-| **Lokasi** | Taman Jatisari Permai, Jl. Semeru 2 Blok DI No. 18-19, RT.002/RW.016, Kel. Jatisari, Kec. Jatiasih, Kota Bekasi, Jawa Barat 17426 |
+| **Lokasi** | Taman Jatisari Permai, Jl. Semeru 2 Blok DI No. 18, RT.002/RW.016, Kel. Jatisari, Kec. Jatiasih, Kota Bekasi, Jawa Barat 17426 |
 | **Maps** | [Google Maps](https://maps.app.goo.gl/x8h9EpjDU6npPFGR8) |
 
 ---
