@@ -1044,9 +1044,9 @@
     // Gallery with fallback
     (function() {
         const grid = document.getElementById('galleryGrid');
-        for (let i = 1; i <= 5; i++) {
+        for (let i = 1; i <= 7; i++) {
             const img = document.createElement('img');
-            img.src = 'assets/images/photo-' + i + '.jpg';
+            img.src = 'assets/images/' + i + '.jpg';
             img.alt = 'Gallery ' + i;
             img.onerror = function() {
                 const placeholder = document.createElement('div');
