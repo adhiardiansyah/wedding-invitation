@@ -265,12 +265,15 @@
             padding: 20px;
         }
         .couple-photo {
-            width: 160px;
-            height: 160px;
+            width: min(42vw, 220px);
+            height: min(42vw, 220px);
             border-radius: 50%;
             object-fit: cover;
-            border: 3px solid var(--gold);
+            border: 4px solid var(--gold);
             margin-bottom: 16px;
+            box-shadow: 0 0 0 3px rgba(255,255,255,0.15),
+                        0 0 0 6px rgba(200,169,110,0.25),
+                        0 8px 24px rgba(0,0,0,0.3);
         }
         .couple-name {
             font-family: 'Crimson Text', serif;
